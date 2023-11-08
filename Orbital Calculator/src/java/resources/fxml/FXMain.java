@@ -1,4 +1,4 @@
-package java.main;
+package java.resources.fxml;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
