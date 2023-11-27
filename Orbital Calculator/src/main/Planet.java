@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package java.main;
+package main;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -12,6 +12,7 @@ import java.util.Vector;
  * @author danie
  */
 public class Planet {
+    private String planetName;
     private double distanceFromSun;
     private double mass; 
     private final double sunMass = 1.99 * Math.pow(10, 30);
@@ -19,9 +20,10 @@ public class Planet {
     private ArrayList<Double> xCords = new ArrayList<>();
     private ArrayList<Double> yCords = new ArrayList<>();
     
-    public Planet(double distanceFromSun, double mass) {
+    public Planet(double distanceFromSun, double mass,String planetName) {
         this.distanceFromSun = distanceFromSun;
         this.mass = mass;
+        this.planetName = planetName;
         plotOrbit();
     }
     
@@ -63,12 +65,14 @@ public class Planet {
             this.yCords.add(yFinal);
         }
     }
+    
+    
 
-    public double getRadius() {
+    public double getDistanceFromSun() {
         return distanceFromSun;
     }
 
-    public void setRadius(double distanceFromSun) {
+    public void setDistanceFromSun(double distanceFromSun) {
         this.distanceFromSun = distanceFromSun;
         this.xCords.clear();
         this.yCords.clear();
@@ -84,6 +88,14 @@ public class Planet {
         this.xCords.clear();
         this.yCords.clear();
         plotOrbit();
+    }
+
+    public String getPlanetName() {
+        return planetName;
+    }
+
+    public void setPlanetName(String planetName) {
+        this.planetName = planetName;
     }
 
     public ArrayList<Double> getxCords() {

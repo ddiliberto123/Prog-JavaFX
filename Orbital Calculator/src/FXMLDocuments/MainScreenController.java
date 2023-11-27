@@ -4,7 +4,7 @@
  */
 package FXMLDocuments;
 
-import java.main.Planet;
+import main.Planet;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.StringConverter;
+import main.ChartSingleton;
 
 /**
  * FXML Controller class
@@ -44,8 +45,6 @@ public class MainScreenController implements Initializable {
     @FXML
     private Button saveButton;
     @FXML
-    private ScatterChart<Double, Double> scatterChart;
-    @FXML
     private Button deleteButton;
     @FXML
     private MenuItem editClear;
@@ -57,7 +56,8 @@ public class MainScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Planet earth = new Planet(1.5*Math.pow(10, 11),5.97*Math.pow(10, 24));
+        Planet earth = new Planet(1.5*Math.pow(10, 11),5.97*Math.pow(10, 24),"Earth");
+        ChartSingleton.addPlanet(earth);
         // TODO
     }    
 
