@@ -4,11 +4,15 @@
  */
 package FXMLDocuments;
 
+import java.util.HashMap;
+
 /**
  *
  * @author Samuel
  */
 public class Preset {
+    
+    public static HashMap presets = new HashMap<String,Preset>();
     
     private String name;
 
