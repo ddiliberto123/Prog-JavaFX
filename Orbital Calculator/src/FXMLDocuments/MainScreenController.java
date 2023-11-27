@@ -4,11 +4,13 @@
  */
 package FXMLDocuments;
 
+import java.main.Planet;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.ScatterChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -36,19 +38,18 @@ public class MainScreenController implements Initializable {
     @FXML
     private Button clearButton;
     @FXML
-    private Rectangle graphPane;
-    @FXML
     private TextField extraValueText;
     @FXML
     private Button saveButton;
+    @FXML
+    private ScatterChart<Double, Double> scatterChart;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-
+        Planet earth = new Planet(1.5*Math.pow(10, 11),5.97*Math.pow(10, 24));
         // TODO
     }    
 
@@ -65,18 +66,17 @@ public class MainScreenController implements Initializable {
     private void savePreset(ActionEvent event) {
         
         presetBox.setConverter(new StringConverter<Preset>() {
-    @Override
-    
-    public String toString(Preset object) {
-        return object.getName();
-    }
+        @Override
+        public String toString(Preset object) {
+            return object.getName();
+        }
 
-    @Override
-    public Preset fromString(String string) {
-        return null;
-    }
-});
-        System.out.println(presetBox.getAccessibleText());
+        @Override
+        public Preset fromString(String string) {
+            return null;
+        }
+    });
+        System.out.println(presetBox.getEditor().getText());
         System.out.println();  
        //  Preset toAdd = new Preset(presetBox.getEditor().getEditorComponent().getText());
        

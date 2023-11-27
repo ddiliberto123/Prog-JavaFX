@@ -4,10 +4,17 @@
  */
 package java.main;
 
+import javafx.scene.chart.ScatterChart;
+
 /**
  *
  * @author danie
  */
-public class Orbit {
+public class ChartSingleton {
+    public static ChartSingleton chartController = new ChartSingleton();
+    public static ScatterChart theChart;
+
+    private ChartSingleton() {
+    }
     
 }
