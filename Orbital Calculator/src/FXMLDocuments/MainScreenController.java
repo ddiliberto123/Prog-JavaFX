@@ -6,11 +6,13 @@ package FXMLDocuments;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -41,6 +43,12 @@ public class MainScreenController implements Initializable {
     private TextField extraValueText;
     @FXML
     private Button saveButton;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private MenuItem editClear;
+    @FXML
+    private MenuItem fileClose;
 
     /**
      * Initializes the controller class.
@@ -76,12 +84,40 @@ public class MainScreenController implements Initializable {
         return null;
     }
 });
-        System.out.println(presetBox.getAccessibleText());
-        System.out.println();  
-       //  Preset toAdd = new Preset(presetBox.getEditor().getEditorComponent().getText());
-       
-        // presetBox.getItems().add(toAdd); 
+        // System.out.println(presetBox.getEditor().getText());
+         
+        Preset toAdd = new Preset(presetBox.getEditor().getText());
+         
+        presetBox.getItems().add(toAdd); 
+        Preset.presets.put(toAdd.getName(), toAdd); 
+         
+         
         
+        
+    }
+
+    @FXML
+    private void deletePreset(ActionEvent event) {
+        
+         String name = presetBox.getEditor().getText(); 
+        presetBox.getItems().remove(Preset.presets.get(name)); 
+        
+    }
+
+    @FXML
+    private void deleteAllPresets(ActionEvent event) {
+        
+        presetBox.getItems().clear();
+        massText.clear();
+        radiusText.clear();
+        extraValueText.clear();
+        
+    }
+
+    @FXML
+    private void closeApp(ActionEvent event) {
+        
+        Platform.exit(); 
         
     }
     
