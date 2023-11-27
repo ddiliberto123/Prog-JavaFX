@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.util.StringConverter;
 
 /**
  * FXML Controller class
@@ -25,7 +26,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private VBox controleBox;
     @FXML
-    private ComboBox<?> presetBox;
+    private ComboBox<Preset> presetBox;
     @FXML
     private TextField massText;
     @FXML
@@ -36,6 +37,10 @@ public class MainScreenController implements Initializable {
     private Button clearButton;
     @FXML
     private Rectangle graphPane;
+    @FXML
+    private TextField extraValueText;
+    @FXML
+    private Button saveButton;
 
     /**
      * Initializes the controller class.
@@ -43,8 +48,7 @@ public class MainScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        
-        
+
         // TODO
     }    
 
@@ -53,6 +57,31 @@ public class MainScreenController implements Initializable {
 
         massText.clear();
         radiusText.clear();
+        extraValueText.clear();
+        
+    }
+
+    @FXML
+    private void savePreset(ActionEvent event) {
+        
+        presetBox.setConverter(new StringConverter<Preset>() {
+    @Override
+    
+    public String toString(Preset object) {
+        return object.getName();
+    }
+
+    @Override
+    public Preset fromString(String string) {
+        return null;
+    }
+});
+        System.out.println(presetBox.getAccessibleText());
+        System.out.println();  
+       //  Preset toAdd = new Preset(presetBox.getEditor().getEditorComponent().getText());
+       
+        // presetBox.getItems().add(toAdd); 
+        
         
     }
     
