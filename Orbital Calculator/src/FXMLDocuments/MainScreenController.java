@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
@@ -49,8 +50,9 @@ public class MainScreenController implements Initializable {
     private MenuItem editClear;
     @FXML
     private MenuItem fileClose;
+    public ScatterChart<Double, Double> scatterChart;
     @FXML
-    private static ScatterChart<Double, Double> scatterChart;
+    private BorderPane borderPane;
 
     /**
      * Initializes the controller class.
@@ -62,6 +64,7 @@ public class MainScreenController implements Initializable {
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("y");
         scatterChart = new ScatterChart(xAxis,yAxis);
+        borderPane.setCenter(scatterChart);
         Planet.setTheChart(scatterChart);
         Planet earth = new Planet(1.5*Math.pow(10, 11),5.97*Math.pow(10, 24),"Earth");
         System.out.println(scatterChart.getData().get(0));

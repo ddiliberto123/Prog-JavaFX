@@ -31,9 +31,7 @@ public class Planet {
     }
     
     private double gravitationalForce(double xCord,double yCord,double mass1,double mass2){
-        System.out.println("x : " + xCord  + "   y : " + yCord);
-        System.out.println("de :  " + -(this.gravitationalConstant * mass1 * mass2)/((Math.pow(xCord, 2))+Math.pow(yCord, 2)));
-        return (-this.gravitationalConstant * mass1 * mass2)/((Math.pow(xCord, 2))+Math.pow(yCord, 2));
+        return -(this.gravitationalConstant * mass1 * mass2)/((Math.pow(xCord, 2))+Math.pow(yCord, 2));
     }
     
     private void plotOrbit(){
@@ -59,13 +57,14 @@ public class Planet {
         
         while (currentTime < maxTime){
             currentTime += deltaTime;
-            xVelocity = xVelocity + (deltaTime*gravitationalForce(xFinal,yFinal,this.mass,this.sunMass)
-                    * xFinal * Math.pow(Math.pow(xFinal, 2) + Math.pow(xFinal, 2), -0.5))/this.mass;
+            xVelocity = xVelocity + deltaTime*gravitationalForce(xFinal,yFinal,this.mass,this.sunMass)
+                    * xFinal * Math.pow((Math.pow(xFinal, 2) + Math.pow(yFinal, 2)), -0.5)/this.mass;
 
-            yVelocity = yVelocity + (deltaTime*gravitationalForce(xFinal,yFinal,this.mass,this.sunMass)
-                    * yFinal * Math.pow(Math.pow(xFinal, 2) + Math.pow(xFinal, 2), -0.5))/this.mass;
+            yVelocity = yVelocity + deltaTime*gravitationalForce(xFinal,yFinal,this.mass,this.sunMass)
+                    * yFinal * Math.pow((Math.pow(xFinal, 2) + Math.pow(yFinal, 2)), -0.5)/this.mass;
 
-            System.out.println(xVelocity + " : " + xFinal);
+            System.out.println("x  "+xVelocity + " : " + xFinal);
+            System.out.println("y  "+yVelocity + " : " + yFinal);
             xFinal = xFinal + deltaTime * xVelocity;
             yFinal = yFinal + deltaTime * yVelocity;
 
