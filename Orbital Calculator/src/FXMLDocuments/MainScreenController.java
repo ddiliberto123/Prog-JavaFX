@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.control.Button;
@@ -50,7 +51,7 @@ public class MainScreenController implements Initializable {
     private MenuItem editClear;
     @FXML
     private MenuItem fileClose;
-    public ScatterChart<Double, Double> scatterChart;
+    public LineChart<Double, Double> lineChart;
     @FXML
     private BorderPane borderPane;
 
@@ -63,9 +64,21 @@ public class MainScreenController implements Initializable {
         xAxis.setLabel("x");
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("y");
-        scatterChart = new ScatterChart(xAxis,yAxis);
-        borderPane.setCenter(scatterChart);
-        Planet.setTheChart(scatterChart);
+        lineChart = new LineChart(xAxis,yAxis);
+        lineChart.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
+        lineChart.setCreateSymbols(false);
+        
+        lineChart.setOnScroll(e -> {
+            if (e.getDeltaY() == 0)
+                return;
+            else if (e.getDeltaY() < 0){
+                
+            } else if (e.getDeltaY() > 0){
+            
+            }
+        });
+        borderPane.setCenter(lineChart);
+        Planet.setTheChart(lineChart);
         Planet earth = new Planet(1.5e11,6e24,0,30000,"Earth");
     }    
 

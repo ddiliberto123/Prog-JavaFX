@@ -6,6 +6,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Vector;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 
@@ -15,7 +16,7 @@ import javafx.scene.chart.XYChart;
  */
 public class Planet {
     private String planetName;
-    private static ScatterChart theChart;
+    private static LineChart theChart;
     private static double gravitationalConstant = 6.67408e-11;
     private double distanceFromSun;
     private double mass; 
@@ -58,8 +59,6 @@ public class Planet {
         double yVelocity = this.yInitialVelocity;
         
         while (currentTime < maxTime){
-            
-            
             currentTime = currentTime + deltaTime;
             xVelocity = xVelocity + (deltaTime*gravitationalForce(xFinal,yFinal,this.mass,this.sunMass)
                     * xFinal * Math.pow(xFinal * xFinal + yFinal * yFinal, -0.5))/6e24;
@@ -110,7 +109,7 @@ public class Planet {
         this.planetName = planetName;
     }
 
-    public static void setTheChart(ScatterChart theChart) {
+    public static void setTheChart(LineChart theChart) {
         Planet.theChart = theChart;
         
     }
