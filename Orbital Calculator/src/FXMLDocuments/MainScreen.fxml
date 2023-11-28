@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocuments.MainScreenController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocuments.MainScreenController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -38,7 +38,7 @@
       <VBox fx:id="controleBox" prefHeight="389.0" prefWidth="175.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Presets" />
-            <ComboBox fx:id="presetBox" editable="true" prefHeight="35.0" prefWidth="150.0" promptText="Insert Name" />
+            <ComboBox fx:id="presetBox" editable="true" onAction="#loadPreset" prefHeight="35.0" prefWidth="150.0" promptText="Insert Name" />
             <Label text="Mass (kg)" />
             <TextField fx:id="massText" prefHeight="25.0" prefWidth="150.0" />
             <Label text="Distance from the sun (m)" />

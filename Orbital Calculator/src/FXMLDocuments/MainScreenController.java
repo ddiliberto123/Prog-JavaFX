@@ -231,5 +231,19 @@ public class MainScreenController implements Initializable {
         Platform.exit(); 
         
     }
+    
+    @FXML
+    private void loadPreset(){
+        
+        Planet loading = presetBox.getSelectionModel().getSelectedItem();
+        if(!(loading == null)){
+        massText.setText(""+loading.getMass());
+        radiusText.setText(""+loading.getDistanceFromSun());
+        xVel.setText(""+loading.getxInitalVelocity());
+        yVel.setText(""+loading.getyInitalVelocity());
+        }
+        
+    }
+    
 }
 
