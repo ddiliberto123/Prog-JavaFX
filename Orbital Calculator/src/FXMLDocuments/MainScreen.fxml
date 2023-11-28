@@ -46,8 +46,8 @@
             <Label text="Inital Velocity (m/s)" />
             <HBox alignment="TOP_CENTER" prefHeight="27.0" prefWidth="155.0" VBox.vgrow="NEVER">
                <children>
-                  <TextField maxHeight="-Infinity" onAction="#checkIfDouble" onKeyTyped="#checkIfDouble" prefHeight="25.0" prefWidth="80.0" promptText="X velocity" fx:id="xVel" />
-                  <TextField fx:id="yVel" maxWidth="-Infinity" onAction="#checkIfDouble" onKeyTyped="#checkIfDouble" prefHeight="25.0" prefWidth="80.0" promptText="Y velocity" />
+                  <TextField maxHeight="-Infinity" onAction="#checkIfDouble" onKeyTyped="#checkIfDouble3" prefHeight="25.0" prefWidth="80.0" promptText="X velocity" fx:id="xVel" />
+                  <TextField fx:id="yVel" maxWidth="-Infinity" onAction="#checkIfDouble" onKeyTyped="#checkIfDouble4" prefHeight="25.0" prefWidth="80.0" promptText="Y velocity" />
                </children>
             </HBox>
             <Button fx:id="startButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Start" />

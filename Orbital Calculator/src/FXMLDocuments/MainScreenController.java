@@ -75,18 +75,8 @@ public class MainScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        presetBox.setCellFactory( c -> {
-            ListCell<ComboBoxItemWrap<Planet>> cell = new ListCell<>(){
-                @Override
-                protected void updateItem(ComboBoxItemWrap<Planet> item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (!empty) {
-                        final CheckBox cb = new CheckBox(item.toString());
-                        cb.selectedProperty().bind(item.checkProperty());
-                        setGraphic(cb);
-                    }
-                }
-            };
+        saveButton.setDisable(true); 
+        
 
         NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel("x");
@@ -99,7 +89,8 @@ public class MainScreenController implements Initializable {
         System.out.println(scatterChart.getData().get(0));
 
         // TODO
-    }    
+    }
+
 
     @FXML
     private void clearAll(ActionEvent event) {
@@ -189,6 +180,32 @@ public class MainScreenController implements Initializable {
              
         }
     }
-    
+
+    @FXML
+    private void checkIfDouble3(KeyEvent event) {
+        try{
+        Double.parseDouble(xVel.getText());
+        saveButton.setDisable(false);
+        }
+        catch(Exception e){
+            saveButton.setDisable(true); 
+        }
+    }
+
+    @FXML
+    private void checkIfDouble(ActionEvent event) {
+    }
+
+    @FXML
+    private void checkIfDouble4(KeyEvent event) {
+        
+        try{
+        Double.parseDouble(yVel.getText());
+        saveButton.setDisable(false);
+        }
+        catch(Exception e){
+            saveButton.setDisable(true); 
+        }
+    }
 }
 
