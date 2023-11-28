@@ -11,15 +11,14 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.util.StringConverter;
-import main.ChartSingleton;
 
 /**
  * FXML Controller class
@@ -50,14 +49,22 @@ public class MainScreenController implements Initializable {
     private MenuItem editClear;
     @FXML
     private MenuItem fileClose;
+    @FXML
+    private static ScatterChart<Double, Double> scatterChart;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        NumberAxis xAxis = new NumberAxis();
+        xAxis.setLabel("x");
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("y");
+        scatterChart = new ScatterChart(xAxis,yAxis);
+        Planet.setTheChart(scatterChart);
         Planet earth = new Planet(1.5*Math.pow(10, 11),5.97*Math.pow(10, 24),"Earth");
-        ChartSingleton.addPlanet(earth);
+        System.out.println(scatterChart.getData().get(0));
         // TODO
     }    
 

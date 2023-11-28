@@ -58,7 +58,7 @@
       </VBox>
    </left>
    <center>
-      <ScatterChart fx:id="scatterChart" prefHeight="261.0" prefWidth="316.0" BorderPane.alignment="CENTER">
+      <ScatterChart fx:id="scatterChart" BorderPane.alignment="CENTER">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
