@@ -20,15 +20,19 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 import javafx.scene.layout.BorderPane;
 
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.util.StringConverter;
 
 
@@ -78,6 +82,35 @@ public class MainScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initializeChart();
+        //https://gillius.org/jfxutils/docs/0.3/org/gillius/jfxutils/chart/ChartZoomManager.html
+//        ComboBox<ComboBoxItemWrap<Planet>> cb = new ComboBox<>();
+//        
+//        
+//        cb.setCellFactory( c -> {
+//            ListCell<ComboBoxItemWrap<Planet>> cell = new ListCell<>(){
+//                @Override
+//                protected void updateItem(ComboBoxItemWrap<Planet> item, boolean empty) {
+//                    super.updateItem(item, empty);
+//                    if (!empty) {
+//                        final CheckBox cb = new CheckBox(item.toString());
+//                        cb.selectedProperty().bind(item.checkProperty());
+//                        setGraphic(cb);
+//                    }
+//                }
+//            };
+//
+//            cell.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> {
+//                cell.getItem().checkProperty().set(!cell.getItem().checkProperty().get());
+//                StringBuilder sb = new StringBuilder();
+//                cb.getItems().filtered( f-> f!=null).filtered( f-> f.getCheck()).forEach( p -> {
+//                    sb.append("; "+p.getItem());
+//                });
+//                final String string = sb.toString();
+//                cb.setPromptText(string.substring(Integer.min(2, string.length())));
+//            });
+//
+//            return cell;
+//        });
         saveButton.disableProperty().bind(Bindings.createBooleanBinding(() -> ! saveButtonBoolean(),
                 massText.textProperty(),
                 radiusText.textProperty(),
@@ -186,6 +219,11 @@ public class MainScreenController implements Initializable {
         radiusText.clear();
         xVel.clear();
         yVel.clear();
+        lineChart.getData().clear();
+        XYChart.Series series = new XYChart.Series<>();
+        series.setName("The Sun");
+        series.getData().add(new XYChart.Data(0,0));
+        lineChart.getData().add(series);
     }
 
     @FXML
