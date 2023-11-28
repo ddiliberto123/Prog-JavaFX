@@ -4,7 +4,9 @@
  */
 package main;
 
+import FXMLDocuments.Preset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Vector;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.ScatterChart;
@@ -15,6 +17,8 @@ import javafx.scene.chart.XYChart;
  * @author danie
  */
 public class Planet {
+    
+    public static HashMap presets = new HashMap<String,Planet>();
     private String planetName;
     private static LineChart theChart;
     private static double gravitationalConstant = 6.67408e-11;

@@ -4,7 +4,9 @@
  */
 package FXMLDocuments;
 
+
 import main.Planet;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -18,9 +20,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+
+import javafx.scene.input.KeyEvent;
+
 import javafx.scene.layout.BorderPane;
+
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
+
+
 
 /**
  * FXML Controller class
@@ -32,7 +40,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private VBox controleBox;
     @FXML
-    private ComboBox<Preset> presetBox;
+    private ComboBox<Planet> presetBox;
     @FXML
     private TextField massText;
     @FXML
@@ -41,8 +49,7 @@ public class MainScreenController implements Initializable {
     private Button startButton;
     @FXML
     private Button clearButton;
-    @FXML
-    private TextField extraValueText;
+    
     @FXML
     private Button saveButton;
     @FXML
@@ -54,12 +61,23 @@ public class MainScreenController implements Initializable {
     public LineChart<Double, Double> lineChart;
     @FXML
     private BorderPane borderPane;
+    @FXML
+    private TextField xVel;
+    @FXML
+    private TextField yVel;
+    
+    
+
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        saveButton.setDisable(true); 
+        
+
         NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel("x");
         NumberAxis yAxis = new NumberAxis();
@@ -87,30 +105,32 @@ public class MainScreenController implements Initializable {
 
         massText.clear();
         radiusText.clear();
-        extraValueText.clear();
+        xVel.clear();
+        yVel.clear();
         
     }
 
     @FXML
     private void savePreset(ActionEvent event) {
         
-        presetBox.setConverter(new StringConverter<Preset>() {
-        @Override
-        public String toString(Preset object) {
-            return object.getName();
-        }
+        presetBox.setConverter(new StringConverter<Planet>() {
+    @Override
+    
+    public String toString(Planet object) {
+        return object.getPlanetName();
+    }
 
     @Override
-    public Preset fromString(String string) {
+    public Planet fromString(String string) {
         return null;
     }
 });
         // System.out.println(presetBox.getEditor().getText());
          
-        Preset toAdd = new Preset(presetBox.getEditor().getText());
+        Planet toAdd = new Planet(Double.parseDouble(radiusText.getText()),Double.parseDouble(massText.getText()),presetBox.getEditor().getText());
          
         presetBox.getItems().add(toAdd); 
-        Preset.presets.put(toAdd.getName(), toAdd); 
+        Preset.presets.put(toAdd.getPlanetName(), toAdd); 
          
          
         
@@ -131,7 +151,8 @@ public class MainScreenController implements Initializable {
         presetBox.getItems().clear();
         massText.clear();
         radiusText.clear();
-        extraValueText.clear();
+        xVel.clear();
+        yVel.clear();
         
     }
 
@@ -141,5 +162,58 @@ public class MainScreenController implements Initializable {
         Platform.exit(); 
         
     }
-    
+
+    @FXML
+    private void checkIfDouble(KeyEvent event) {
+        try{
+        Double.parseDouble(massText.getText());
+        saveButton.setDisable(false);
+        }
+        catch(Exception e){
+            saveButton.setDisable(true); 
+             
+        }
+        
+        
+    }
+
+    @FXML
+    private void checkIfDouble2(KeyEvent event) {
+        
+        try{
+        Double.parseDouble(radiusText.getText()); 
+        }
+        catch(Exception e){
+            saveButton.setDisable(true); 
+             
+        }
+    }
+
+    @FXML
+    private void checkIfDouble3(KeyEvent event) {
+        try{
+        Double.parseDouble(xVel.getText());
+        saveButton.setDisable(false);
+        }
+        catch(Exception e){
+            saveButton.setDisable(true); 
+        }
+    }
+
+    @FXML
+    private void checkIfDouble(ActionEvent event) {
+    }
+
+    @FXML
+    private void checkIfDouble4(KeyEvent event) {
+        
+        try{
+        Double.parseDouble(yVel.getText());
+        saveButton.setDisable(false);
+        }
+        catch(Exception e){
+            saveButton.setDisable(true); 
+        }
+    }
 }
+
