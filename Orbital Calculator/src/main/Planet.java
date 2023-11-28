@@ -80,10 +80,8 @@ public class Planet {
         XYChart.Series series = new XYChart.Series<>();
         
         series.setName(this.planetName);
-        for (int i = 1; i < xCords.size(); i++) {
+        for (int i = 1; i < xCords.size(); i++) 
             series.getData().add(new XYChart.Data(xCords.get(i),yCords.get(i)));
-//            System.out.println(xCords.get(i) + " : " + yCords.get(i));
-        }
         theChart.getData().add(series);
     }
 
@@ -135,6 +133,9 @@ public class Planet {
         this.yInitialVelocity = yInitalVelocity;
         plotOrbit();
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return this.planetName;
+    }
 }
