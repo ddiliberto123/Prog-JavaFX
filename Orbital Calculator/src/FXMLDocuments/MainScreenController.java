@@ -66,9 +66,7 @@ public class MainScreenController implements Initializable {
         scatterChart = new ScatterChart(xAxis,yAxis);
         borderPane.setCenter(scatterChart);
         Planet.setTheChart(scatterChart);
-        Planet earth = new Planet(1.5*Math.pow(10, 11),5.97*Math.pow(10, 24),"Earth");
-        System.out.println(scatterChart.getData().get(0));
-        // TODO
+        Planet earth = new Planet(1.5e11,6e24,"Earth");
     }    
 
     @FXML
