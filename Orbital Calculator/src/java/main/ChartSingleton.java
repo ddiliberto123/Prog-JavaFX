@@ -4,6 +4,8 @@
  */
 package java.main;
 
+import FXMLDocuments.Preset;
+import java.util.HashMap;
 import javafx.scene.chart.ScatterChart;
 
 /**
@@ -11,6 +13,8 @@ import javafx.scene.chart.ScatterChart;
  * @author danie
  */
 public class ChartSingleton {
+    
+    public static HashMap presets = new HashMap<String,Preset>();
     public static ChartSingleton chartController = new ChartSingleton();
     public static ScatterChart theChart;
 

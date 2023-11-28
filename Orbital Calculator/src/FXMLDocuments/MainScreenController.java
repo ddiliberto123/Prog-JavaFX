@@ -10,10 +10,12 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.ScatterChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.StringConverter;
@@ -38,8 +40,6 @@ public class MainScreenController implements Initializable {
     @FXML
     private Button clearButton;
     @FXML
-    private Rectangle graphPane;
-    @FXML
     private TextField extraValueText;
     @FXML
     private Button saveButton;
@@ -49,6 +49,8 @@ public class MainScreenController implements Initializable {
     private MenuItem editClear;
     @FXML
     private MenuItem fileClose;
+    @FXML
+    private ScatterChart<?, ?> scatterChart;
 
     /**
      * Initializes the controller class.
@@ -119,6 +121,32 @@ public class MainScreenController implements Initializable {
         
         Platform.exit(); 
         
+    }
+
+    @FXML
+    private void checkIfDouble(KeyEvent event) {
+        try{
+        Double.parseDouble(massText.getText());
+        saveButton.setDisable(false);
+        }
+        catch(Exception e){
+            saveButton.setDisable(true); 
+             
+        }
+        
+        
+    }
+
+    @FXML
+    private void checkIfDouble2(KeyEvent event) {
+        
+        try{
+        Double.parseDouble(radiusText.getText()); 
+        }
+        catch(Exception e){
+            saveButton.setDisable(true); 
+             
+        }
     }
     
 }

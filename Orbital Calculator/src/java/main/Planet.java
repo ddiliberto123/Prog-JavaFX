@@ -5,6 +5,7 @@
 package java.main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -12,6 +13,8 @@ import java.util.Vector;
  * @author danie
  */
 public class Planet {
+    public static HashMap presets = new HashMap<String,Planet>();
+    private String name; 
     private double distanceFromSun;
     private double mass; 
     private final double sunMass = 1.99 * Math.pow(10, 30);
@@ -19,7 +22,7 @@ public class Planet {
     private ArrayList<Double> xCords = new ArrayList<>();
     private ArrayList<Double> yCords = new ArrayList<>();
     
-    public Planet(double distanceFromSun, double mass) {
+    public Planet(String name,double distanceFromSun, double mass) {
         this.distanceFromSun = distanceFromSun;
         this.mass = mass;
         plotOrbit();

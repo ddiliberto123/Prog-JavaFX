@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocuments.MainScreenController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocuments.MainScreenController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -42,9 +42,9 @@
             <Label text="Presets" />
             <ComboBox fx:id="presetBox" editable="true" prefHeight="35.0" prefWidth="150.0" promptText="Insert Name" />
             <Label text="Mass" />
-            <TextField fx:id="massText" />
+            <TextField fx:id="massText" onAction="#checkIfDouble" onKeyTyped="#checkIfDouble" />
             <Label text="Radius" />
-            <TextField fx:id="radiusText" />
+            <TextField fx:id="radiusText" onKeyTyped="#checkIfDouble2" />
             <Label text="Label" />
             <TextField fx:id="extraValueText" />
             <Button fx:id="startButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Start" />
