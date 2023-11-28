@@ -10,6 +10,7 @@ import main.Planet;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -98,6 +99,11 @@ public class MainScreenController implements Initializable {
         borderPane.setCenter(lineChart);
         Planet.setTheChart(lineChart);
         Planet earth = new Planet(1.5e11,6e24,0,30000,"Earth");
+        saveButton.disableProperty().bind(Bindings.createBooleanBinding(() -> ! saveButtonBoolean(),
+                massText.textProperty(),
+                radiusText.textProperty(),
+                xVel.textProperty(),
+                yVel.textProperty()));
     }    
 
     @FXML
@@ -127,10 +133,10 @@ public class MainScreenController implements Initializable {
 });
         // System.out.println(presetBox.getEditor().getText());
          
-        Planet toAdd = new Planet(Double.parseDouble(radiusText.getText()),Double.parseDouble(massText.getText()),presetBox.getEditor().getText());
-         
-        presetBox.getItems().add(toAdd); 
-        Preset.presets.put(toAdd.getPlanetName(), toAdd); 
+//        Planet toAdd = new Planet(Double.parseDouble(radiusText.getText()),Double.parseDouble(massText.getText()),presetBox.getEditor().getText());
+//         
+//        presetBox.getItems().add(toAdd); 
+//        Preset.presets.put(toAdd.getPlanetName(), toAdd); 
          
          
         
@@ -162,57 +168,25 @@ public class MainScreenController implements Initializable {
         Platform.exit(); 
         
     }
-
-    @FXML
-    private void checkIfDouble(KeyEvent event) {
+    
+    private boolean saveButtonBoolean(){
         try{
-        Double.parseDouble(massText.getText());
-        saveButton.setDisable(false);
+            Double.parseDouble(massText.getText());
+            Double.parseDouble(radiusText.getText());
+            Double.parseDouble(xVel.getText());
+            Double.parseDouble(yVel.getText());
+            if (massText.getText().isEmpty())
+                return false;
+            if (radiusText.getText().isEmpty())
+                return false;
+            if (xVel.getText().isEmpty())
+                return false;
+            if (yVel.getText().isEmpty())
+                return false;
+            return true;
         }
         catch(Exception e){
-            saveButton.setDisable(true); 
-             
-        }
-        
-        
-    }
-
-    @FXML
-    private void checkIfDouble2(KeyEvent event) {
-        
-        try{
-        Double.parseDouble(radiusText.getText()); 
-        }
-        catch(Exception e){
-            saveButton.setDisable(true); 
-             
-        }
-    }
-
-    @FXML
-    private void checkIfDouble3(KeyEvent event) {
-        try{
-        Double.parseDouble(xVel.getText());
-        saveButton.setDisable(false);
-        }
-        catch(Exception e){
-            saveButton.setDisable(true); 
-        }
-    }
-
-    @FXML
-    private void checkIfDouble(ActionEvent event) {
-    }
-
-    @FXML
-    private void checkIfDouble4(KeyEvent event) {
-        
-        try{
-        Double.parseDouble(yVel.getText());
-        saveButton.setDisable(false);
-        }
-        catch(Exception e){
-            saveButton.setDisable(true); 
+            return false;
         }
     }
 }

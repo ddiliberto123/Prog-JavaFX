@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocuments.MainScreenController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocuments.MainScreenController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -40,14 +40,14 @@
             <Label text="Presets" />
             <ComboBox fx:id="presetBox" editable="true" prefHeight="35.0" prefWidth="150.0" promptText="Insert Name" />
             <Label text="Mass (kg)" />
-            <TextField fx:id="massText" onAction="#checkIfDouble" onKeyTyped="#checkIfDouble" prefHeight="25.0" prefWidth="150.0" />
+            <TextField fx:id="massText" prefHeight="25.0" prefWidth="150.0" />
             <Label text="Distance from the sun (m)" />
-            <TextField fx:id="radiusText" onKeyTyped="#checkIfDouble2" prefHeight="25.0" prefWidth="160.0" />
+            <TextField fx:id="radiusText" prefHeight="25.0" prefWidth="160.0" />
             <Label text="Inital Velocity (m/s)" />
             <HBox alignment="TOP_CENTER" prefHeight="27.0" prefWidth="155.0" VBox.vgrow="NEVER">
                <children>
-                  <TextField maxHeight="-Infinity" onAction="#checkIfDouble" onKeyTyped="#checkIfDouble3" prefHeight="25.0" prefWidth="80.0" promptText="X velocity" fx:id="xVel" />
-                  <TextField fx:id="yVel" maxWidth="-Infinity" onAction="#checkIfDouble" onKeyTyped="#checkIfDouble4" prefHeight="25.0" prefWidth="80.0" promptText="Y velocity" />
+                  <TextField maxHeight="-Infinity" prefHeight="25.0" prefWidth="80.0" promptText="X velocity" fx:id="xVel" />
+                  <TextField fx:id="yVel" maxWidth="-Infinity" prefHeight="25.0" prefWidth="80.0" promptText="Y velocity" />
                </children>
             </HBox>
             <Button fx:id="startButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Start" />
