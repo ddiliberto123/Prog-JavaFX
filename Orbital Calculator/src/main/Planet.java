@@ -20,12 +20,15 @@ public class Planet {
     private double distanceFromSun;
     private double mass; 
     private double sunMass = 2e30;
+    private double xInitialVelocity,yInitialVelocity;
     
     
-    public Planet(double distanceFromSun, double mass,String planetName) {
+    public Planet(double distanceFromSun, double mass,double xInitialVel,double yInitialVel,String planetName) {
         this.distanceFromSun = distanceFromSun;
         this.mass = mass;
         this.planetName = planetName;
+        this.xInitialVelocity = xInitialVel;
+        this.yInitialVelocity = yInitialVel; 
         plotOrbit();
     }
     
@@ -38,7 +41,7 @@ public class Planet {
         double deltaTime = 24*60*60;
         double currentTime = 0;
         
-        double xInitial = 1.5e11;
+        double xInitial = this.distanceFromSun;
         ArrayList<Double> xCords = new ArrayList<>();
         xCords.add(xInitial);
         double xFinal = xInitial;
@@ -46,15 +49,17 @@ public class Planet {
         double yInitial = 0;
         ArrayList<Double> yCords = new ArrayList<>();
         yCords.add(yInitial);
-        double yFinal = xInitial;
+        double yFinal = yInitial;
         
-        double xInitialVelocity = 0;
-        double xVelocity = xInitialVelocity;
         
-        double yInitialVelocity = 30000;
-        double yVelocity = yInitialVelocity;
+        double xVelocity = this.xInitialVelocity;
+        
+        
+        double yVelocity = this.yInitialVelocity;
         
         while (currentTime < maxTime){
+            
+            
             currentTime = currentTime + deltaTime;
             xVelocity = xVelocity + (deltaTime*gravitationalForce(xFinal,yFinal,this.mass,this.sunMass)
                     * xFinal * Math.pow(xFinal * xFinal + yFinal * yFinal, -0.5))/6e24;
@@ -107,5 +112,26 @@ public class Planet {
 
     public static void setTheChart(ScatterChart theChart) {
         Planet.theChart = theChart;
+        
     }
+
+    public double getxInitalVelocity() {
+        return xInitialVelocity;
+    }
+
+    public void setxInitalVelocity(double xInitalVelocity) {
+        this.xInitialVelocity = xInitalVelocity;
+        plotOrbit();
+    }
+
+    public double getyInitalVelocity() {
+        return yInitialVelocity;
+    }
+
+    public void setyInitalVelocity(double yInitalVelocity) {
+        this.yInitialVelocity = yInitalVelocity;
+        plotOrbit();
+    }
+    
+    
 }
