@@ -4,7 +4,9 @@
  */
 package main;
 
+import FXMLDocuments.Preset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Vector;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
@@ -14,6 +16,8 @@ import javafx.scene.chart.XYChart;
  * @author danie
  */
 public class Planet {
+    
+    public static HashMap presets = new HashMap<String,Planet>();
     private String planetName;
     private static ScatterChart theChart;
     private double distanceFromSun;
@@ -22,6 +26,8 @@ public class Planet {
     private final double gravitationalConstant = 6.67 * Math.pow(10, -11);
 //    private ArrayList<Double> xCords = new ArrayList<>();
 //    private ArrayList<Double> yCords = new ArrayList<>();
+    
+    
     
     public Planet(double distanceFromSun, double mass,String planetName) {
         this.distanceFromSun = distanceFromSun;
@@ -110,4 +116,6 @@ public class Planet {
     public static void setTheChart(ScatterChart theChart) {
         Planet.theChart = theChart;
     }
+    
+    
 }

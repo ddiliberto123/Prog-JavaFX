@@ -27,9 +27,6 @@ public class Preset {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
-    
-    
+
     
 }

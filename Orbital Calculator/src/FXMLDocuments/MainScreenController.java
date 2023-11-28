@@ -39,7 +39,7 @@ public class MainScreenController implements Initializable {
     @FXML
     private VBox controleBox;
     @FXML
-    private ComboBox<Preset> presetBox;
+    private ComboBox<Planet> presetBox;
     @FXML
     private TextField massText;
     @FXML
@@ -48,8 +48,7 @@ public class MainScreenController implements Initializable {
     private Button startButton;
     @FXML
     private Button clearButton;
-    @FXML
-    private TextField extraValueText;
+    
     @FXML
     private Button saveButton;
     @FXML
@@ -62,6 +61,12 @@ public class MainScreenController implements Initializable {
     public ScatterChart<Double, Double> scatterChart;
     @FXML
     private BorderPane borderPane;
+    @FXML
+    private TextField xVel;
+    @FXML
+    private TextField yVel;
+    
+    
 
 
     /**
@@ -69,6 +74,19 @@ public class MainScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        presetBox.setCellFactory( c -> {
+            ListCell<ComboBoxItemWrap<Planet>> cell = new ListCell<>(){
+                @Override
+                protected void updateItem(ComboBoxItemWrap<Planet> item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (!empty) {
+                        final CheckBox cb = new CheckBox(item.toString());
+                        cb.selectedProperty().bind(item.checkProperty());
+                        setGraphic(cb);
+                    }
+                }
+            };
 
         NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel("x");
@@ -88,31 +106,32 @@ public class MainScreenController implements Initializable {
 
         massText.clear();
         radiusText.clear();
-        extraValueText.clear();
+        xVel.clear();
+        yVel.clear();
         
     }
 
     @FXML
     private void savePreset(ActionEvent event) {
         
-        presetBox.setConverter(new StringConverter<Preset>() {
+        presetBox.setConverter(new StringConverter<Planet>() {
     @Override
     
-    public String toString(Preset object) {
-        return object.getName();
+    public String toString(Planet object) {
+        return object.getPlanetName();
     }
 
     @Override
-    public Preset fromString(String string) {
+    public Planet fromString(String string) {
         return null;
     }
 });
         // System.out.println(presetBox.getEditor().getText());
          
-        Preset toAdd = new Preset(presetBox.getEditor().getText());
+        Planet toAdd = new Planet(Double.parseDouble(radiusText.getText()),Double.parseDouble(massText.getText()),presetBox.getEditor().getText());
          
         presetBox.getItems().add(toAdd); 
-        Preset.presets.put(toAdd.getName(), toAdd); 
+        Preset.presets.put(toAdd.getPlanetName(), toAdd); 
          
          
         
@@ -133,7 +152,8 @@ public class MainScreenController implements Initializable {
         presetBox.getItems().clear();
         massText.clear();
         radiusText.clear();
-        extraValueText.clear();
+        xVel.clear();
+        yVel.clear();
         
     }
 
@@ -171,3 +191,4 @@ public class MainScreenController implements Initializable {
     }
     
 }
+
