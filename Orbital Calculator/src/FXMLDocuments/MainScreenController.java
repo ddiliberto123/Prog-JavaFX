@@ -56,8 +56,6 @@ public class MainScreenController implements Initializable {
     @FXML
     private TextField radiusText;
     @FXML
-    private Button startButton;
-    @FXML
     private Button clearButton;
     
     @FXML
@@ -75,6 +73,10 @@ public class MainScreenController implements Initializable {
     private TextField xVel;
     @FXML
     private TextField yVel;
+    @FXML
+    private Button generateOrbitButton;
+    @FXML
+    private Button generateAllOrbits;
     
     
 
@@ -175,6 +177,7 @@ public class MainScreenController implements Initializable {
     
     private void savePlanet(double distanceFromSun,double mass, double xInitialVelocity, double yInitialVelocity,String name){
         Planet toAdd = new Planet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name);
+        
         presetBox.getItems().add(toAdd); 
         Preset.presets.put(name, toAdd); 
     }
@@ -263,6 +266,30 @@ public class MainScreenController implements Initializable {
         xVel.setText(""+loading.getxInitalVelocity());
         yVel.setText(""+loading.getyInitalVelocity());
         }
+        
+    }
+
+    @FXML
+    private void generateOrbit(ActionEvent event) {
+        
+        String name = presetBox.getEditor().getText();
+        Planet toBeGenerated = (Planet) Preset.presets.get(name);
+        toBeGenerated.plotOrbit();
+        
+    }
+
+    @FXML
+    private void generateAllOrbits(ActionEvent event) {
+        
+        
+        for(int i = 0; i< presetBox.getVisibleRowCount() ; i++){
+            
+            Planet toBeGenerated = presetBox.getItems().get(i); 
+            toBeGenerated.plotOrbit();
+        
+        
+        }
+        
         
     }
     
