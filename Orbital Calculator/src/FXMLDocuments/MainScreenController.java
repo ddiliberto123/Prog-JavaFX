@@ -28,11 +28,14 @@ import javafx.scene.control.TextField;
 
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 
 import javafx.scene.layout.BorderPane;
 
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Scale;
 import javafx.util.StringConverter;
 
 
@@ -53,8 +56,6 @@ public class MainScreenController implements Initializable {
     @FXML
     private TextField radiusText;
     @FXML
-    private Button startButton;
-    @FXML
     private Button clearButton;
     
     @FXML
@@ -72,6 +73,10 @@ public class MainScreenController implements Initializable {
     private TextField xVel;
     @FXML
     private TextField yVel;
+    @FXML
+    private Button generateOrbitButton;
+    @FXML
+    private Button generateAllOrbits;
     
     
 
@@ -172,6 +177,7 @@ public class MainScreenController implements Initializable {
     
     private void savePlanet(double distanceFromSun,double mass, double xInitialVelocity, double yInitialVelocity,String name){
         Planet toAdd = new Planet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name);
+        
         presetBox.getItems().add(toAdd); 
         Preset.presets.put(name, toAdd); 
     }
@@ -186,15 +192,33 @@ public class MainScreenController implements Initializable {
         lineChart.setCreateSymbols(false);
         lineChart.setMaxHeight(300);
         lineChart.setMaxWidth(400);
-        lineChart.setOnScroll(e -> {
-            if (e.getDeltaY() == 0)
-                return;
-            else if (e.getDeltaY() < 0){
-                
-            } else if (e.getDeltaY() > 0){
+        lineChart.setOnScroll((ScrollEvent event) ->{ 
             
+
+            double zoomAmount = 1.05;
+            double deltaY = event.getDeltaY();
+            if(deltaY > 0){
+                
+                zoomAmount = 1.05;
+            } else if(deltaY < 0){
+                
+                zoomAmount = 1/1.05;
             }
-        });
+            Scale newScale = new Scale();
+            newScale.setPivotX(event.getX());
+            newScale.setPivotY(event.getY());
+            newScale.setX(lineChart.getScaleX() + event.getDeltaX());
+            newScale.setY(lineChart.getScaleY() + event.getDeltaY());
+           
+            lineChart.getTransforms().add(newScale);
+            Rectangle section = new Rectangle();  
+            lineChart.getXAxis().setPrefHeight(300);
+            lineChart.getYAxis().setPrefHeight(300);
+            lineChart.getXAxis().setPrefWidth(300);
+            lineChart.getYAxis().setPrefWidth(300);
+           
+       }); 
+        
         XYChart.Series series = new XYChart.Series<>();
         series.setName("The Sun");
         series.getData().add(new XYChart.Data(0,0));
@@ -242,6 +266,30 @@ public class MainScreenController implements Initializable {
         xVel.setText(""+loading.getxInitalVelocity());
         yVel.setText(""+loading.getyInitalVelocity());
         }
+        
+    }
+
+    @FXML
+    private void generateOrbit(ActionEvent event) {
+        
+        String name = presetBox.getEditor().getText();
+        Planet toBeGenerated = (Planet) Preset.presets.get(name);
+        toBeGenerated.plotOrbit();
+        
+    }
+
+    @FXML
+    private void generateAllOrbits(ActionEvent event) {
+        
+        
+        for(int i = 0; i< presetBox.getVisibleRowCount() ; i++){
+            
+            Planet toBeGenerated = presetBox.getItems().get(i); 
+            toBeGenerated.plotOrbit();
+        
+        
+        }
+        
         
     }
     

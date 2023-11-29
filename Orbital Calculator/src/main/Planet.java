@@ -34,14 +34,14 @@ public class Planet {
         this.planetName = planetName;
         this.xInitialVelocity = xInitialVel;
         this.yInitialVelocity = yInitialVel; 
-        plotOrbit();
+
     }
     
     private double gravitationalForce(double x,double y,double mass1,double mass2){
         return -gravitationalConstant * mass1 * mass2/(x * x + y * y);
     }
     
-    private void plotOrbit(){
+    public void plotOrbit(){
         double maxTime = 24*60*60*365 * 1.5;
         double deltaTime = 24*60*60;
         double currentTime = 0;
