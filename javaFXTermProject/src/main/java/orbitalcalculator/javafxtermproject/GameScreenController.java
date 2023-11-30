@@ -18,13 +18,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Scale;
 import org.gillius.jfxutils.chart.AxisConstraint;
-import static org.gillius.jfxutils.chart.AxisConstraint.None;
+import org.gillius.jfxutils.chart.AxisConstraintStrategies;
 import org.gillius.jfxutils.chart.AxisConstraintStrategy;
 import org.gillius.jfxutils.chart.ChartPanManager;
 import org.gillius.jfxutils.chart.ChartZoomManager;
@@ -76,34 +74,6 @@ public class GameScreenController implements Initializable {
         ChartPanManager chartPanManager = new ChartPanManager(lineChart);
         chartPanManager.start();
         //https://gillius.org/jfxutils/docs/0.3/org/gillius/jfxutils/chart/ChartZoomManager.html
-//        ComboBox<ComboBoxItemWrap<Planet>> cb = new ComboBox<>();
-//        
-//        
-//        cb.setCellFactory( c -> {
-//            ListCell<ComboBoxItemWrap<Planet>> cell = new ListCell<>(){
-//                @Override
-//                protected void updateItem(ComboBoxItemWrap<Planet> item, boolean empty) {
-//                    super.updateItem(item, empty);
-//                    if (!empty) {
-//                        final CheckBox cb = new CheckBox(item.toString());
-//                        cb.selectedProperty().bind(item.checkProperty());
-//                        setGraphic(cb);
-//                    }
-//                }
-//            };
-//
-//            cell.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> {
-//                cell.getItem().checkProperty().set(!cell.getItem().checkProperty().get());
-//                StringBuilder sb = new StringBuilder();
-//                cb.getItems().filtered( f-> f!=null).filtered( f-> f.getCheck()).forEach( p -> {
-//                    sb.append("; "+p.getItem());
-//                });
-//                final String string = sb.toString();
-//                cb.setPromptText(string.substring(Integer.min(2, string.length())));
-//            });
-//
-//            return cell;
-//        });
         saveButton.disableProperty().bind(Bindings.createBooleanBinding(() -> !saveButtonBoolean(),
                 massText.textProperty(),
                 radiusText.textProperty(),
@@ -183,40 +153,17 @@ public class GameScreenController implements Initializable {
         lineChart.setCreateSymbols(false);
         lineChart.setMaxHeight(300);
         lineChart.setMaxWidth(400);
+        //https://gillius.org/jfxutils/docs/latest/
+        //https://www.javatips.net/api/jfxutils-master/jfxutils/src/main/java/org/gillius/jfxutils/chart/DefaultAxisTickFormatter.java
         ChartPanManager chartPanManager = new ChartPanManager(lineChart);
         chartPanManager.start();
         Rectangle zoomRect = new Rectangle();
         zoomRect.setWidth(10);
         zoomRect.setHeight(10);
         ChartZoomManager chartZoomManager = new ChartZoomManager(borderPane,zoomRect,lineChart);
-//        AxisConstraintStrategy strategy = new AxisConstraintStrategy();
-//        chartZoomManager.setAxisConstraintStrategy(AxisConstraintStrategy(AxisConstraint.None));
-//        chartZoomManager.start();
-//        lineChart.setOnScroll((ScrollEvent event) -> {
-//
-//            double zoomAmount = 1.05;
-//            double deltaY = event.getDeltaY();
-//            if (deltaY > 0) {
-//
-//                zoomAmount = 1.05;
-//            } else if (deltaY < 0) {
-//
-//                zoomAmount = 1 / 1.05;
-//            }
-//            Scale newScale = new Scale();
-//            newScale.setPivotX(event.getX());
-//            newScale.setPivotY(event.getY());
-//            newScale.setX(lineChart.getScaleX() + event.getDeltaX());
-//            newScale.setY(lineChart.getScaleY() + event.getDeltaY());
-//
-//            lineChart.getTransforms().add(newScale);
-//            Rectangle section = new Rectangle();
-//            lineChart.getXAxis().setPrefHeight(300);
-//            lineChart.getYAxis().setPrefHeight(300);
-//            lineChart.getXAxis().setPrefWidth(300);
-//            lineChart.getYAxis().setPrefWidth(300);
-//
-//        });
+        AxisConstraintStrategy axisConstraintStrategy = AxisConstraintStrategies.getFixed(AxisConstraint.None);
+        chartZoomManager.setAxisConstraintStrategy(axisConstraintStrategy);
+        chartZoomManager.start();
 
         XYChart.Series series = new XYChart.Series<>();
         series.setName("The Sun");
