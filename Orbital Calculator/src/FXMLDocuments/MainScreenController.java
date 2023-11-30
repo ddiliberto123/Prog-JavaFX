@@ -116,11 +116,15 @@ public class MainScreenController implements Initializable {
 //
 //            return cell;
 //        });
+        
+
         saveButton.disableProperty().bind(Bindings.createBooleanBinding(() -> ! saveButtonBoolean(),
                 massText.textProperty(),
                 radiusText.textProperty(),
                 xVel.textProperty(),
                 yVel.textProperty()));
+        
+        
         
     }    
 
@@ -204,18 +208,18 @@ public class MainScreenController implements Initializable {
                 
                 zoomAmount = 1/1.05;
             }
-            Scale newScale = new Scale();
-            newScale.setPivotX(event.getX());
-            newScale.setPivotY(event.getY());
-            newScale.setX(lineChart.getScaleX() + event.getDeltaX());
-            newScale.setY(lineChart.getScaleY() + event.getDeltaY());
-           
-            lineChart.getTransforms().add(newScale);
-            Rectangle section = new Rectangle();  
-            lineChart.getXAxis().setPrefHeight(300);
-            lineChart.getYAxis().setPrefHeight(300);
-            lineChart.getXAxis().setPrefWidth(300);
-            lineChart.getYAxis().setPrefWidth(300);
+//            Scale newScale = new Scale();
+//            newScale.setPivotX(event.getX());
+//            newScale.setPivotY(event.getY());
+//            newScale.setX(lineChart.getScaleX() + event.getDeltaX());
+//            newScale.setY(lineChart.getScaleY() + event.getDeltaY());
+//           
+//            lineChart.getTransforms().add(newScale);
+//            Rectangle section = new Rectangle();  
+//            lineChart.getXAxis().setPrefHeight(300);
+//            lineChart.getYAxis().setPrefHeight(300);
+//            lineChart.getXAxis().setPrefWidth(300);
+//            lineChart.getYAxis().setPrefWidth(300);
            
        }); 
         
@@ -227,6 +231,8 @@ public class MainScreenController implements Initializable {
         Planet.setTheChart(lineChart);
         
         savePlanet(1.5e11,6e24,0,30000,"Earth");
+        Planet earth = (Planet) Preset.presets.get("Earth"); 
+        earth.plotOrbit();
     }
     
     @FXML
@@ -292,6 +298,7 @@ public class MainScreenController implements Initializable {
         
         
     }
+    
     
 }
 
