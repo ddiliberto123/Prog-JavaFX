@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 
 /**
  *
  * @author 2271909
  */
 public class Planet {
-    public static HashMap presets = new HashMap<String,Planet>();
+//    public static HashMap presets = new HashMap<String,Planet>();
     private String planetName;
     private static LineChart theChart;
     private static double gravitationalConstant = 6.67408e-11;
@@ -22,6 +23,7 @@ public class Planet {
     private double mass; 
     private double sunMass = 2e30;
     private double xInitialVelocity,yInitialVelocity;
+    private Series series = new XYChart.Series<>();
     
     
     public Planet(double distanceFromSun, double mass,double xInitialVel,double yInitialVel,String planetName) {
@@ -30,7 +32,7 @@ public class Planet {
         this.planetName = planetName;
         this.xInitialVelocity = xInitialVel;
         this.yInitialVelocity = yInitialVel; 
-
+        plotOrbit();
     }
     
     private double gravitationalForce(double x,double y,double mass1,double mass2){
@@ -73,12 +75,18 @@ public class Planet {
             yCords.add(yFinal);
             
         }
-        XYChart.Series series = new XYChart.Series<>();
         
-        series.setName(this.planetName);
+        this.series.setName(this.planetName);
         for (int i = 1; i < xCords.size(); i++) 
             series.getData().add(new XYChart.Data(xCords.get(i),yCords.get(i)));
-        theChart.getData().add(series);
+    }
+    
+    public void show(){
+        theChart.getData().add(this.series);
+    }
+    
+    public void hide(){
+        theChart.getData().remove(this.series);
     }
 
     public double getDistanceFromSun() {

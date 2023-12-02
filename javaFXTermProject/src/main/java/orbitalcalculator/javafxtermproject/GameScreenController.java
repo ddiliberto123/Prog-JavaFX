@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import org.controlsfx.control.CheckComboBox;
 import org.gillius.jfxutils.chart.AxisConstraint;
 import org.gillius.jfxutils.chart.AxisConstraintStrategies;
 import org.gillius.jfxutils.chart.AxisConstraintStrategy;
@@ -70,6 +72,36 @@ public class GameScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        CheckComboBox<Planet> checkComboBox = new CheckComboBox();
+        controleBox.getChildren().add(1, checkComboBox);
+        checkComboBox.getItems().add(new Planet(1.5e11, 6e24, 0, 30000, "Earth"));
+        checkComboBox.getItems().add(new Planet(1.5e11, 6e24, 0, 30000, "Joe"));
+        checkComboBox.getItems().add(new Planet(1.5e11, 6e24, 0, 30000, "Shmoe"));
+        checkComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends Planet> change) {
+                while(change.next()){
+                    if(change.wasAdded()){ 
+                        for(Planet planet : change.getAddedSubList()){
+                            if (checkComboBox.getItems().contains(planet)){
+                                checkComboBox.setTitle(planet.getPlanetName());
+                                System.out.println(change.getAddedSubList());
+                                planet.show();
+                            }
+                        }
+                    }
+                    else if (change.wasRemoved()){
+                        for(Planet planet : change.getRemoved())
+                            planet.hide();
+                        if (checkComboBox.getItems().size() == 1){
+                            checkComboBox.setTitle("");
+                        }
+                    }
+                }
+                
+            }
+        });
+//        checkComboBox.setCheckModel();
         initializeChart();
         ChartPanManager chartPanManager = new ChartPanManager(lineChart);
         chartPanManager.start();
@@ -172,7 +204,7 @@ public class GameScreenController implements Initializable {
         borderPane.setCenter(lineChart);
         Planet.setTheChart(lineChart);
 
-        savePlanet(1.5e11, 6e24, 0, 30000, "Earth");
+//        savePlanet(1.5e11, 6e24, 0, 30000, "Earth");
     }
 
     @FXML
