@@ -1,0 +1,29 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Dec 2, 2023, 11:05:29 p.m.
+    Author     : danie
+*/
+
+.button {
+    -fx-font-family: Calibri;
+    -fx-font-size: 50;
+    -fx-border-color: rgb(77,189,209);
+    -fx-padding: 10 20 10 20;
+    -fx-border-width: 3;
+    -fx-text-align: center;
+    -fx-background-color: none;
+    -fx-border-radius: 4;
+}
+
+.button:hover {
+    -fx-background-color: rgb(77,189,209);
+    -fx-animation-delay: 1000;
+    -fx-border: none;
+}
+
+.title {
+    -fx-font-family: Calibri;
+}
