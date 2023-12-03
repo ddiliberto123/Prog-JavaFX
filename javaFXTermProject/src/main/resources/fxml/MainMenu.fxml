@@ -3,32 +3,18 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="orbitalcalculator.javafxtermproject.MainMenuController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="orbitalcalculator.javafxtermproject.MainMenuController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
-         <center>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="startButton" mnemonicParsing="false" onAction="#goToMainPage" text="Start">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="exitButton" mnemonicParsing="false" onAction="#closeApp" text="Exit">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Button>
-               </children>
-            </VBox>
-         </center>
          <top>
-            <Label text="Orbital Calculator" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER" styleClass="title" stylesheets="@../stylesheets/style.css" text="Orbital Calculator" BorderPane.alignment="CENTER">
                <font>
                   <Font size="50.0" />
                </font>
@@ -37,6 +23,32 @@
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
+         <left>
+            <VBox alignment="CENTER" prefHeight="307.0" prefWidth="224.0" spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="startButton" alignment="CENTER" mnemonicParsing="false" onAction="#goToMainPage" styleClass=".button" stylesheets="@../stylesheets/style.css" text="Start" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="exitButton" alignment="CENTER" mnemonicParsing="false" onAction="#closeApp" styleClass=".button" stylesheets="@../stylesheets/style.css" text="Exit" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </left>
+         <right>
+            <ImageView fitHeight="155.0" fitWidth="297.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../images/calc.png" />
+               </image>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </right>
       </BorderPane>
    </children>
 </AnchorPane>

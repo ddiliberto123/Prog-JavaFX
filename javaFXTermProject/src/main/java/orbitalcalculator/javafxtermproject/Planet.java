@@ -15,9 +15,10 @@ import javafx.scene.chart.XYChart.Series;
  * @author 2271909
  */
 public class Planet {
-//    public static HashMap presets = new HashMap<String,Planet>();
-    private String planetName;
     private static LineChart theChart;
+    private static double years = 6;
+    public boolean shown = false;
+    private String planetName;
     private static double gravitationalConstant = 6.67408e-11;
     private double distanceFromSun;
     private double mass; 
@@ -40,7 +41,7 @@ public class Planet {
     }
     
     public void plotOrbit(){
-        double maxTime = 24*60*60*365 * 1.5;
+        double maxTime = 24*60*60*365 * years;
         double deltaTime = 24*60*60;
         double currentTime = 0;
         
@@ -63,7 +64,7 @@ public class Planet {
         while (currentTime < maxTime){
             currentTime = currentTime + deltaTime;
             xVelocity = xVelocity + (deltaTime*gravitationalForce(xFinal,yFinal,this.mass,this.sunMass)
-                    * xFinal * Math.pow(xFinal * xFinal + yFinal * yFinal, -0.5))/6e24;
+                    * xFinal * Math.pow(xFinal * xFinal + yFinal * yFinal, -0.5))/this.mass;
 
             yVelocity = yVelocity + deltaTime  * gravitationalForce(xFinal,yFinal,this.mass,this.sunMass)
                     * yFinal * Math.pow(xFinal * xFinal + yFinal * yFinal, -0.5)/this.mass;
@@ -82,11 +83,16 @@ public class Planet {
     }
     
     public void show(){
-        theChart.getData().add(this.series);
+        if(!this.shown){
+            theChart.getData().add(this.series);
+            this.shown = false;
+        }
+        
     }
     
     public void hide(){
         theChart.getData().remove(this.series);
+        this.shown = false;
     }
 
     public double getDistanceFromSun() {

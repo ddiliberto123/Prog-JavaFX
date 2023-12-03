@@ -5,11 +5,15 @@
 package orbitalcalculator.javafxtermproject;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
@@ -23,6 +27,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import org.controlsfx.control.CheckComboBox;
+import org.controlsfx.control.IndexedCheckModel;
 import org.gillius.jfxutils.chart.AxisConstraint;
 import org.gillius.jfxutils.chart.AxisConstraintStrategies;
 import org.gillius.jfxutils.chart.AxisConstraintStrategy;
@@ -67,16 +72,17 @@ public class GameScreenController implements Initializable {
 
     public LineChart<Double, Double> lineChart;
 
+    public HashMap<String, Planet> allPlanets = new HashMap<>();
+    public CheckComboBox<Planet> checkComboBox = new CheckComboBox();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        CheckComboBox<Planet> checkComboBox = new CheckComboBox();
         controleBox.getChildren().add(1, checkComboBox);
-        checkComboBox.getItems().add(new Planet(1.5e11, 6e24, 0, 30000, "Earth"));
-        checkComboBox.getItems().add(new Planet(1.5e11, 6e24, 0, 30000, "Joe"));
-        checkComboBox.getItems().add(new Planet(1.5e11, 6e24, 0, 30000, "Shmoe"));
+        checkComboBox.addEventHandler(EventType.ROOT, e -> {
+//            System.out.println(e.);
+        });
         checkComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<>() {
             @Override
             public void onChanged(ListChangeListener.Change<? extends Planet> change) {
@@ -101,6 +107,14 @@ public class GameScreenController implements Initializable {
                 
             }
         });
+//        checkComboBox.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends Planet> c) -> {
+//            while(c.next()){
+//                if (c.wasUpdated()){
+//                    
+//                }
+//            }
+//        });
+        
 //        checkComboBox.setCheckModel();
         initializeChart();
         ChartPanManager chartPanManager = new ChartPanManager(lineChart);
@@ -130,18 +144,14 @@ public class GameScreenController implements Initializable {
             Double.parseDouble(radiusText.getText());
             Double.parseDouble(xVel.getText());
             Double.parseDouble(yVel.getText());
-            if (massText.getText().isEmpty()) {
+            if (massText.getText().isEmpty()) 
                 return false;
-            }
-            if (radiusText.getText().isEmpty()) {
+            if (radiusText.getText().isEmpty()) 
                 return false;
-            }
-            if (xVel.getText().isEmpty()) {
+            if (xVel.getText().isEmpty()) 
                 return false;
-            }
-            if (yVel.getText().isEmpty()) {
+            if (yVel.getText().isEmpty()) 
                 return false;
-            }
             return true;
         } catch (Exception e) {
             return false;
@@ -150,29 +160,23 @@ public class GameScreenController implements Initializable {
 
     @FXML
     private void savePreset(ActionEvent event) {
-
-//        presetBox.setConverter(new StringConverter<Planet>() {
-//            @Override
-//
-//            public String toString(Planet object) {
-//                return object.getPlanetName();
-//            }
-//
-//            @Override
-//            public Planet fromString(String string) {
-//                return null;
-//            }
-//        });
-        savePlanet(Double.parseDouble(radiusText.getText()), Double.parseDouble(massText.getText()),
-                Double.parseDouble(xVel.getText()), Double.parseDouble(yVel.getText()), presetBox.getEditor().getText());
-
+        double distanceFromSun = Double.parseDouble(radiusText.getText());
+        double mass = Double.parseDouble(massText.getText());
+        double xInitialVelocity = Double.parseDouble(xVel.getText());
+        double yInitialVelocity = Double.parseDouble(yVel.getText());
+        String name = presetBox.getEditor().getText();
+        
+//        allPlanets.put(name, new Planet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name));
+        savePlanet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name);
     }
 
     private void savePlanet(double distanceFromSun, double mass, double xInitialVelocity, double yInitialVelocity, String name) {
-        Planet toAdd = new Planet(distanceFromSun, mass, xInitialVelocity, yInitialVelocity, name);
-
-        presetBox.getItems().add(toAdd);
-        Preset.presets.put(name, toAdd);
+//        Planet toAdd = new Planet(distanceFromSun, mass, xInitialVelocity, yInitialVelocity, name);
+//
+//        presetBox.getItems().add(toAdd);
+//        Preset.presets.put(name, toAdd);
+        allPlanets.put(name, new Planet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name));
+        checkComboBox.getItems().add(allPlanets.get(name));
     }
 
     private void initializeChart() {
@@ -196,7 +200,7 @@ public class GameScreenController implements Initializable {
         AxisConstraintStrategy axisConstraintStrategy = AxisConstraintStrategies.getFixed(AxisConstraint.None);
         chartZoomManager.setAxisConstraintStrategy(axisConstraintStrategy);
         chartZoomManager.start();
-
+        lineChart.setAnimated(false);
         XYChart.Series series = new XYChart.Series<>();
         series.setName("The Sun");
         series.getData().add(new XYChart.Data(0, 0));
@@ -204,7 +208,8 @@ public class GameScreenController implements Initializable {
         borderPane.setCenter(lineChart);
         Planet.setTheChart(lineChart);
 
-//        savePlanet(1.5e11, 6e24, 0, 30000, "Earth");
+        savePlanet(1.4748e11, 5.97219e24, 0, 30000, "Earth");
+        savePlanet(230e9,6.39e23,0,23e3,"Mars");
     }
 
     @FXML
