@@ -24,7 +24,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.input.DragEvent;
 
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -77,6 +79,8 @@ public class MainScreenController implements Initializable {
     private Button generateOrbitButton;
     @FXML
     private Button generateAllOrbits;
+    @FXML
+    private Slider slider;
     
     
 
@@ -180,7 +184,7 @@ public class MainScreenController implements Initializable {
     }
     
     private void savePlanet(double distanceFromSun,double mass, double xInitialVelocity, double yInitialVelocity,String name){
-        Planet toAdd = new Planet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name);
+        Planet toAdd = new Planet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name,slider.getValue());
         
         presetBox.getItems().add(toAdd); 
         Preset.presets.put(name, toAdd); 
@@ -196,18 +200,18 @@ public class MainScreenController implements Initializable {
         lineChart.setCreateSymbols(false);
         lineChart.setMaxHeight(300);
         lineChart.setMaxWidth(400);
-        lineChart.setOnScroll((ScrollEvent event) ->{ 
-            
-
-            double zoomAmount = 1.05;
-            double deltaY = event.getDeltaY();
-            if(deltaY > 0){
-                
-                zoomAmount = 1.05;
-            } else if(deltaY < 0){
-                
-                zoomAmount = 1/1.05;
-            }
+//        lineChart.setOnScroll((ScrollEvent event) ->{ 
+//            
+//
+//            double zoomAmount = 1.05;
+//            double deltaY = event.getDeltaY();
+//            if(deltaY > 0){
+//                
+//                zoomAmount = 1.05;
+//            } else if(deltaY < 0){
+//                
+//                zoomAmount = 1/1.05;
+//            }
 //            Scale newScale = new Scale();
 //            newScale.setPivotX(event.getX());
 //            newScale.setPivotY(event.getY());
@@ -220,8 +224,8 @@ public class MainScreenController implements Initializable {
 //            lineChart.getYAxis().setPrefHeight(300);
 //            lineChart.getXAxis().setPrefWidth(300);
 //            lineChart.getYAxis().setPrefWidth(300);
-           
-       }); 
+//         
+//       }); 
         
         XYChart.Series series = new XYChart.Series<>();
         series.setName("The Sun");
@@ -296,6 +300,13 @@ public class MainScreenController implements Initializable {
         
         }
         
+        
+    }
+
+    @FXML
+    private void getNewTime(DragEvent event) {
+        
+       slider.getValue(); 
         
     }
     

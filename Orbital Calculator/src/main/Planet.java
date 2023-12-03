@@ -23,17 +23,19 @@ public class Planet {
     private static LineChart theChart;
     private static double gravitationalConstant = 6.67408e-11;
     private double distanceFromSun;
-    private double mass; 
+    private double mass;
     private double sunMass = 2e30;
     private double xInitialVelocity,yInitialVelocity;
+    private double numOfYears; 
     
     
-    public Planet(double distanceFromSun, double mass,double xInitialVel,double yInitialVel,String planetName) {
+    public Planet(double distanceFromSun, double mass,double xInitialVel,double yInitialVel,String planetName,double time) {
         this.distanceFromSun = distanceFromSun;
         this.mass = mass;
         this.planetName = planetName;
         this.xInitialVelocity = xInitialVel;
-        this.yInitialVelocity = yInitialVel; 
+        this.yInitialVelocity = yInitialVel;
+        this.numOfYears = time;
 
     }
     
@@ -42,7 +44,7 @@ public class Planet {
     }
     
     public void plotOrbit(){
-        double maxTime = 24*60*60*365 * 1.5;
+        double maxTime = 24*60*60*365 * 1.5 * this.numOfYears;
         double deltaTime = 24*60*60;
         double currentTime = 0;
         
