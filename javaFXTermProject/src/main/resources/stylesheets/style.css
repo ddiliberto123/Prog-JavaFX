@@ -9,21 +9,38 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .button {
     -fx-font-family: Calibri;
-    -fx-font-size: 50;
+    -fx-font-size: 45;
     -fx-border-color: rgb(77,189,209);
     -fx-padding: 10 20 10 20;
     -fx-border-width: 3;
     -fx-text-align: center;
     -fx-background-color: none;
     -fx-border-radius: 4;
+    -fx-font-weight: bold;
 }
 
 .button:hover {
     -fx-background-color: rgb(77,189,209);
     -fx-animation-delay: 1000;
+    -fx-padding: 15 25 15 25;
+    -fx-font-size: 40;
     -fx-border: none;
 }
 
+.button.game{
+    -fx-font-size: 12;
+    -fx-padding: 2 4 2 4;
+}
+
 .title {
+    -fx-font-family: Calibri;
+}
+
+.label {
+    -fx-font-family: Calibri;
+    -fx-font-weight: bold;
+}
+
+.text {
     -fx-font-family: Calibri;
 }

@@ -27,13 +27,16 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+//https://controlsfx.github.io/javadoc/11.0.3/index.html
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.IndexedCheckModel;
+//https://gillius.org/jfxutils/docs/latest/
 import org.gillius.jfxutils.chart.AxisConstraint;
 import org.gillius.jfxutils.chart.AxisConstraintStrategies;
 import org.gillius.jfxutils.chart.AxisConstraintStrategy;
@@ -57,8 +60,6 @@ public class GameScreenController implements Initializable {
     @FXML
     private VBox controleBox;
     
-//    private ComboBox<Planet> presetBox;
-    
     @FXML
     private TextField massText;
     @FXML
@@ -76,14 +77,16 @@ public class GameScreenController implements Initializable {
     @FXML
     private Button generateAllOrbits;
 
-    public LineChart<Double, Double> lineChart;
+    public static LineChart<Double, Double> lineChart;
 
-    public HashMap<String, Planet> allPlanets = new HashMap<>();
+    public static HashMap<String, Planet> allPlanets = new HashMap<>();
     
     @FXML
     public CheckComboBox<Planet> checkComboBox = new CheckComboBox();
     @FXML
     private TextField nameField;
+    @FXML
+    private Slider yearSlider;
     /**
      * Initializes the controller class.
      */
@@ -114,11 +117,32 @@ public class GameScreenController implements Initializable {
                 }
             }
         });
-        initializeChart();
-        ChartPanManager chartPanManager = new ChartPanManager(lineChart);
-        chartPanManager.start();
-        //https://gillius.org/jfxutils/docs/0.3/org/gillius/jfxutils/chart/ChartZoomManager.html
+        yearSlider.setValue(Planet.getYears());
+        yearSlider.valueProperty().addListener((v,oldValue,newValue) -> {
+            Planet.setYears((double) newValue.intValue());
+            for(Planet planet : allPlanets.values()){
+                if(planet.shown){
+                    planet.hide();
+                    planet.plotOrbit();
+                    planet.show();
+                } else
+                    planet.plotOrbit();
+            }
+        });
+        if(lineChart == null){
+            initializeChart(borderPane);
+            savePlanet(1.4748e11, 5.97219e24, 0, 30000, "Earth");
+            savePlanet(230e9, 6.39e23, 0, 23e3, "Mars");
+        } else {
+            initializeChart(borderPane);
+            for(Planet planet : allPlanets.values()){
+                checkComboBox.getItems().add(planet);
+                if(planet.shown)
+                    planet.shown = false;
+            }
+        }
         saveButton.disableProperty().bind(Bindings.createBooleanBinding(() -> !saveButtonBoolean(),
+                nameField.textProperty(),
                 massText.textProperty(),
                 radiusText.textProperty(),
                 xVel.textProperty(),
@@ -167,11 +191,15 @@ public class GameScreenController implements Initializable {
         if(allPlanets.containsKey(name)){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText("Preset already existant");
-            alert.setContentText("There is already a preset with the name " + name + " would you like to override?");
+            alert.setContentText("There is already a preset with the name \"" + name + "\" would you like to override?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK){
-                deletePreset();
-                savePlanet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name);
+                allPlanets.get(name).hide();
+                allPlanets.get(name).setDistanceFromSun(distanceFromSun);
+                allPlanets.get(name).setMass(mass);
+                allPlanets.get(name).setxInitalVelocity(xInitialVelocity);
+                allPlanets.get(name).setyInitalVelocity(yInitialVelocity);
+                allPlanets.get(name).show();
             }
         } else 
             savePlanet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name);
@@ -182,10 +210,10 @@ public class GameScreenController implements Initializable {
         checkComboBox.getItems().add(allPlanets.get(name));
     }
 
-    private void initializeChart() {
+    private static void initializeChart(BorderPane borderPane) {
         NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel("x");
-        xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis, null, " AU"));
+        xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis, null, " AU" ));
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("y");
         yAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(yAxis, null, " AU"));
@@ -212,10 +240,7 @@ public class GameScreenController implements Initializable {
         series.getData().add(new XYChart.Data(0, 0));
         lineChart.getData().add(series);
         borderPane.setCenter(lineChart);
-        Planet.setTheChart(lineChart);
-
-        savePlanet(1.4748e11, 5.97219e24, 0, 30000, "Earth");
-        savePlanet(230e9,6.39e23,0,23e3,"Mars");
+        
     }
 
     private void deletePreset() {
@@ -229,11 +254,13 @@ public class GameScreenController implements Initializable {
     @FXML
     private void deleteAllPresets(ActionEvent event) {
         checkComboBox.getItems().clear();
-        massText.clear();
-        radiusText.clear();
-        xVel.clear();
-        yVel.clear();
+//        nameField.clear();
+//        massText.clear();
+//        radiusText.clear();
+//        xVel.clear();
+//        yVel.clear();
         lineChart.getData().clear();
+        allPlanets.clear();
         XYChart.Series series = new XYChart.Series<>();
         series.setName("The Sun");
         series.getData().add(new XYChart.Data(0, 0));

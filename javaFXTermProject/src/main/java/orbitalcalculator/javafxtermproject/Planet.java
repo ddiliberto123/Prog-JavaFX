@@ -16,7 +16,8 @@ import javafx.scene.chart.XYChart.Series;
  */
 public class Planet {
     private static LineChart theChart;
-    private static double years = 6;
+    private static boolean AU = true;
+    private static double years = 1;
     public boolean shown = false;
     private String planetName;
     private static double gravitationalConstant = 6.67408e-11;
@@ -24,7 +25,7 @@ public class Planet {
     private double mass; 
     private double sunMass = 2e30;
     private double xInitialVelocity,yInitialVelocity;
-    private Series series = new XYChart.Series<>();
+    private Series series;
     
     
     public Planet(double distanceFromSun, double mass,double xInitialVel,double yInitialVel,String planetName) {
@@ -76,17 +77,20 @@ public class Planet {
             yCords.add(yFinal);
             
         }
-        
+        this.series = new XYChart.Series<>();
         this.series.setName(this.planetName);
-        for (int i = 1; i < xCords.size(); i++) 
-            series.getData().add(new XYChart.Data(xCords.get(i)/1.496e11,yCords.get(i)/1.496e11));
+        for (int i = 1; i < xCords.size(); i++) {
+            if (AU){
+                series.getData().add(new XYChart.Data(xCords.get(i)/1.496e11,yCords.get(i)/1.496e11));
+            }
+            else
+                series.getData().add(new XYChart.Data(xCords.get(i),yCords.get(i)));
+        }
     }
     
     public void show(){
-        if(!this.shown){
-            theChart.getData().add(this.series);
-            this.shown = true;
-        }
+        theChart.getData().add(this.series);
+        this.shown = true;
         
     }
     
@@ -148,4 +152,22 @@ public class Planet {
     public String toString() {
         return this.planetName;
     }
+
+    public static double getYears() {
+        return years;
+    }
+
+    public static void setYears(double years) {
+        Planet.years = years;
+    }
+
+    public static boolean isAU() {
+        return AU;
+    }
+
+    public static void setAU(boolean AU) {
+        Planet.AU = AU;
+    }
+    
+    
 }
