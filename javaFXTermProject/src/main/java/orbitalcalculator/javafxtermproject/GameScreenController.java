@@ -218,6 +218,7 @@ public class GameScreenController implements Initializable {
         yAxis.setLabel("y");
         yAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(yAxis, null, " AU"));
         lineChart = new LineChart(xAxis, yAxis);
+        Planet.setTheChart(lineChart);
         lineChart.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
         lineChart.setCreateSymbols(false);
         lineChart.setPrefSize(400, 400);
