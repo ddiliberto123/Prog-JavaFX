@@ -5,16 +5,19 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="orbitalcalculator.javafxtermproject.GameScreenController">
+<BorderPane fx:id="borderPane" maxHeight="400.0" maxWidth="600.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="orbitalcalculator.javafxtermproject.AboutScreenController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
          <menus>
             <Menu mnemonicParsing="false" text="File">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Back" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToGame" text="Back" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="fileClose" mnemonicParsing="false" onAction="#closeApp" text="Close" />
                </items>
@@ -23,10 +26,27 @@
       </MenuBar>
    </top>
    <center>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This project was made in conjunction with maven. This was done in order to use external packages in the attempt to improve both the stability and user experience of the program. The formulas used in order to calculate the orbits are approximations using Euler’s formulas. Simply put, the formulas calculate the orbit by using the values given by the user and using the physics kinematic formulas to calculate the next position where the difference in time is very small. Doing this calculation multiple times gives a good approximation. The approximation can improve by decreasing this “difference in time.”" wrappingWidth="423.36328125" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="375.0" prefWidth="775.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Project Fruition:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This project was made in conjunction with maven. This was done in order to use external packages in the attempt to improve both the stability and user experience of the program. The formulas used in order to calculate the orbits are approximations using Euler’s formulas. Simply put, the formulas calculate the orbit by using the values given by the user and using the physics kinematic formulas to calculate the next position where the difference in time is very small. Doing this calculation multiple times gives a good approximation. The approximation can improve by decreasing this “difference in time.”" textAlignment="CENTER" wrappingWidth="473.36328125" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="In terms of controls:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="You can scroll on the axis to change zoom in on them individually or zoom in on the chart itself, you can also drag around to see things. Change the values in the fields to get your desired results." textAlignment="CENTER" wrappingWidth="378.494140625" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Project made by Daniel Diliberto &amp; Samuel Marziliano" />
+         </children>
          <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets left="80.0" />
          </BorderPane.margin>
-      </Text>
+      </VBox>
    </center>
+   <right>
+      <ImageView fitHeight="84.0" fitWidth="71.0" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../images/54.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets top="300.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </right>
 </BorderPane>

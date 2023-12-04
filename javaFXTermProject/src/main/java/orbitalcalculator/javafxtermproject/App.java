@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.scene.image.Image;
 
 /**
  * JavaFX App
@@ -18,6 +19,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("MainMenu"), 640, 480);
+        stage.setTitle("Orbital Calculator");
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("/images/calc.png")));
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

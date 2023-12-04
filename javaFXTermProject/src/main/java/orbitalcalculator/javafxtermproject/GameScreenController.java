@@ -4,6 +4,7 @@
  */
 package orbitalcalculator.javafxtermproject;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Optional;
@@ -261,6 +262,11 @@ public class GameScreenController implements Initializable {
     @FXML
     private void deletePresetButton(ActionEvent event) {
         deletePreset();
+    }
+
+    @FXML
+    private void switchToAbout(ActionEvent event) throws IOException {
+        App.setRoot("AboutScreen");
     }
 
 
