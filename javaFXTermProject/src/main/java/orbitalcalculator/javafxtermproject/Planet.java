@@ -64,14 +64,14 @@ public class Planet {
         while (currentTime < maxTime){
             currentTime = currentTime + deltaTime;
             xVelocity = xVelocity + (deltaTime*gravitationalForce(xFinal,yFinal,this.mass,this.sunMass)
-                    * xFinal * Math.pow(xFinal * xFinal + yFinal * yFinal, -0.5))/this.mass;
+                    * xFinal * Math.pow(xFinal * xFinal + yFinal * yFinal, -0.5))/(this.mass);
 
             yVelocity = yVelocity + deltaTime  * gravitationalForce(xFinal,yFinal,this.mass,this.sunMass)
-                    * yFinal * Math.pow(xFinal * xFinal + yFinal * yFinal, -0.5)/this.mass;
+                    * yFinal * Math.pow(xFinal * xFinal + yFinal * yFinal, -0.5)/(this.mass);
 
             xFinal = xFinal + (deltaTime * xVelocity);
             yFinal = yFinal + (deltaTime * yVelocity);
-
+            
             xCords.add(xFinal);
             yCords.add(yFinal);
             
@@ -79,13 +79,13 @@ public class Planet {
         
         this.series.setName(this.planetName);
         for (int i = 1; i < xCords.size(); i++) 
-            series.getData().add(new XYChart.Data(xCords.get(i),yCords.get(i)));
+            series.getData().add(new XYChart.Data(xCords.get(i)/1.496e11,yCords.get(i)/1.496e11));
     }
     
     public void show(){
         if(!this.shown){
             theChart.getData().add(this.series);
-            this.shown = false;
+            this.shown = true;
         }
         
     }

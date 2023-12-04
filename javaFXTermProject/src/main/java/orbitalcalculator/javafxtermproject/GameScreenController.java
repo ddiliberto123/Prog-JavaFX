@@ -6,6 +6,7 @@ package orbitalcalculator.javafxtermproject;
 
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -19,10 +20,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -31,6 +36,7 @@ import org.controlsfx.control.IndexedCheckModel;
 import org.gillius.jfxutils.chart.AxisConstraint;
 import org.gillius.jfxutils.chart.AxisConstraintStrategies;
 import org.gillius.jfxutils.chart.AxisConstraintStrategy;
+import org.gillius.jfxutils.chart.AxisTickFormatter;
 import org.gillius.jfxutils.chart.ChartPanManager;
 import org.gillius.jfxutils.chart.ChartZoomManager;
 
@@ -49,8 +55,9 @@ public class GameScreenController implements Initializable {
     private MenuItem editClear;
     @FXML
     private VBox controleBox;
-    @FXML
-    private ComboBox<Planet> presetBox;
+    
+//    private ComboBox<Planet> presetBox;
+    
     @FXML
     private TextField massText;
     @FXML
@@ -66,56 +73,46 @@ public class GameScreenController implements Initializable {
     @FXML
     private Button deleteButton;
     @FXML
-    private Button generateOrbitButton;
-    @FXML
     private Button generateAllOrbits;
 
     public LineChart<Double, Double> lineChart;
 
     public HashMap<String, Planet> allPlanets = new HashMap<>();
+    
+    @FXML
     public CheckComboBox<Planet> checkComboBox = new CheckComboBox();
+    @FXML
+    private TextField nameField;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        controleBox.getChildren().add(1, checkComboBox);
-        checkComboBox.addEventHandler(EventType.ROOT, e -> {
-//            System.out.println(e.);
-        });
         checkComboBox.getCheckModel().getCheckedItems().addListener(new ListChangeListener<>() {
             @Override
             public void onChanged(ListChangeListener.Change<? extends Planet> change) {
                 while(change.next()){
                     if(change.wasAdded()){ 
                         for(Planet planet : change.getAddedSubList()){
-                            if (checkComboBox.getItems().contains(planet)){
-                                checkComboBox.setTitle(planet.getPlanetName());
-                                System.out.println(change.getAddedSubList());
-                                planet.show();
-                            }
+                            if (planet.shown)
+                                continue;
+                            planet.show();
+                            nameField.setText(planet.getPlanetName());
+                            massText.setText(String.valueOf(planet.getMass()));
+                            radiusText.setText(String.valueOf(planet.getDistanceFromSun()));
+                            xVel.setText(String.valueOf(planet.getxInitalVelocity()));
+                            yVel.setText(String.valueOf(planet.getyInitalVelocity()));
                         }
                     }
                     else if (change.wasRemoved()){
-                        for(Planet planet : change.getRemoved())
-                            planet.hide();
-                        if (checkComboBox.getItems().size() == 1){
-                            checkComboBox.setTitle("");
+                        for(Planet planet : change.getRemoved()){
+                            if (planet.shown)
+                                planet.hide();
                         }
                     }
                 }
-                
             }
         });
-//        checkComboBox.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends Planet> c) -> {
-//            while(c.next()){
-//                if (c.wasUpdated()){
-//                    
-//                }
-//            }
-//        });
-        
-//        checkComboBox.setCheckModel();
         initializeChart();
         ChartPanManager chartPanManager = new ChartPanManager(lineChart);
         chartPanManager.start();
@@ -130,7 +127,7 @@ public class GameScreenController implements Initializable {
 
     @FXML
     private void clearAll(ActionEvent event) {
-
+        nameField.clear();
         massText.clear();
         radiusText.clear();
         xVel.clear();
@@ -144,6 +141,8 @@ public class GameScreenController implements Initializable {
             Double.parseDouble(radiusText.getText());
             Double.parseDouble(xVel.getText());
             Double.parseDouble(yVel.getText());
+            if (nameField.getText().isEmpty())
+                return false;
             if (massText.getText().isEmpty()) 
                 return false;
             if (radiusText.getText().isEmpty()) 
@@ -158,23 +157,26 @@ public class GameScreenController implements Initializable {
         }
     }
 
-    @FXML
-    private void savePreset(ActionEvent event) {
+    private void savePreset() {
+        String name = nameField.getText();
         double distanceFromSun = Double.parseDouble(radiusText.getText());
         double mass = Double.parseDouble(massText.getText());
         double xInitialVelocity = Double.parseDouble(xVel.getText());
         double yInitialVelocity = Double.parseDouble(yVel.getText());
-        String name = presetBox.getEditor().getText();
-        
-//        allPlanets.put(name, new Planet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name));
-        savePlanet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name);
+        if(allPlanets.containsKey(name)){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("Preset already existant");
+            alert.setContentText("There is already a preset with the name " + name + " would you like to override?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK){
+                deletePreset();
+                savePlanet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name);
+            }
+        } else 
+            savePlanet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name);
     }
 
     private void savePlanet(double distanceFromSun, double mass, double xInitialVelocity, double yInitialVelocity, String name) {
-//        Planet toAdd = new Planet(distanceFromSun, mass, xInitialVelocity, yInitialVelocity, name);
-//
-//        presetBox.getItems().add(toAdd);
-//        Preset.presets.put(name, toAdd);
         allPlanets.put(name, new Planet(distanceFromSun,mass,xInitialVelocity,yInitialVelocity,name));
         checkComboBox.getItems().add(allPlanets.get(name));
     }
@@ -182,13 +184,16 @@ public class GameScreenController implements Initializable {
     private void initializeChart() {
         NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel("x");
+        xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis, null, " AU"));
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("y");
+        yAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(yAxis, null, " AU"));
         lineChart = new LineChart(xAxis, yAxis);
         lineChart.setAxisSortingPolicy(LineChart.SortingPolicy.NONE);
         lineChart.setCreateSymbols(false);
-        lineChart.setMaxHeight(300);
-        lineChart.setMaxWidth(400);
+        lineChart.setPrefSize(400, 400);
+        lineChart.setMinSize(Control.USE_PREF_SIZE, Control.USE_PREF_SIZE);
+        lineChart.setMaxSize(Control.USE_PREF_SIZE, Control.USE_PREF_SIZE);
         //https://gillius.org/jfxutils/docs/latest/
         //https://www.javatips.net/api/jfxutils-master/jfxutils/src/main/java/org/gillius/jfxutils/chart/DefaultAxisTickFormatter.java
         ChartPanManager chartPanManager = new ChartPanManager(lineChart);
@@ -212,16 +217,17 @@ public class GameScreenController implements Initializable {
         savePlanet(230e9,6.39e23,0,23e3,"Mars");
     }
 
-    @FXML
-    private void deletePreset(ActionEvent event) {
-        String name = presetBox.getEditor().getText();
-        presetBox.getItems().remove(Preset.presets.get(name));
-
+    private void deletePreset() {
+        String name = nameField.getText();
+        checkComboBox.getItems().remove(allPlanets.get(name));
+        if (allPlanets.get(name).shown)
+            allPlanets.get(name).hide();
+        allPlanets.remove(name);
     }
 
     @FXML
     private void deleteAllPresets(ActionEvent event) {
-        presetBox.getItems().clear();
+        checkComboBox.getItems().clear();
         massText.clear();
         radiusText.clear();
         xVel.clear();
@@ -240,37 +246,22 @@ public class GameScreenController implements Initializable {
     }
 
     @FXML
-    private void loadPreset() {
-
-        Planet loading = presetBox.getSelectionModel().getSelectedItem();
-        if (!(loading == null)) {
-            massText.setText("" + loading.getMass());
-            radiusText.setText("" + loading.getDistanceFromSun());
-            xVel.setText("" + loading.getxInitalVelocity());
-            yVel.setText("" + loading.getyInitalVelocity());
-        }
-
-    }
-
-    @FXML
-    private void generateOrbit(ActionEvent event) {
-
-        String name = presetBox.getEditor().getText();
-        Planet toBeGenerated = (Planet) Preset.presets.get(name);
-        toBeGenerated.plotOrbit();
-
-    }
-
-    @FXML
     private void generateAllOrbits(ActionEvent event) {
-
-        for (int i = 0; i < presetBox.getVisibleRowCount(); i++) {
-
-            Planet toBeGenerated = presetBox.getItems().get(i);
-            toBeGenerated.plotOrbit();
-
+        for (Planet planet : allPlanets.values()){
+            if (!planet.shown)
+                planet.show();
         }
-
     }
+
+    @FXML
+    private void savePresetButton(ActionEvent event) {
+        savePreset();
+    }
+
+    @FXML
+    private void deletePresetButton(ActionEvent event) {
+        deletePreset();
+    }
+
 
 }
