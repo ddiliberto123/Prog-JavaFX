@@ -26,13 +26,15 @@ public class MainMenuController implements Initializable {
     private Button exitButton;
 
     /**
-     * Initializes the controller class.
+     * Initializes the MainMenu controller class which is responsible for the creation of the main menu;
+     * @param url {@code URL} value
+     * @param rb {@code ResourceBundle} value
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
+    }
+    
     @FXML
     private void goToMainPage(ActionEvent event) throws IOException {
         App.setRoot("GameScreen");

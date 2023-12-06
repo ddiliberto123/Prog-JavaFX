@@ -1,3 +1,6 @@
+/**
+ * This package contains the orbital calculator and its respective .java files
+ */
 package orbitalcalculator.javafxtermproject;
 
 /*
@@ -28,7 +31,9 @@ public class AboutScreenController implements Initializable {
     private MenuItem fileClose;
 
     /**
-     * Initializes the controller class.
+     * Initializes the AboutScreen controller class which is responsible for the about page.
+     * @param url {@code URL} value
+     * @param rb {@code ResourceBundle} value
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

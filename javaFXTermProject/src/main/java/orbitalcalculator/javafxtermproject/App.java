@@ -10,12 +10,17 @@ import java.io.IOException;
 import javafx.scene.image.Image;
 
 /**
- * JavaFX App
+ * JavaFX App for Orbital Calculations using Euler's method
  */
 public class App extends Application {
 
     private static Scene scene;
 
+    /**
+     * Creates the JavaFX program and sets the stage/root
+     * @param stage The stage the program will use
+     * @throws IOException Throws if the fxml isn't found
+     */
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("MainMenu"), 640, 480);
@@ -35,6 +40,10 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
+    /**
+     * Launches the JavaFX program
+     * @param args The args
+     */
     public static void main(String[] args) {
         launch();
     }
