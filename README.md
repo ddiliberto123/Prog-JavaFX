@@ -6,3 +6,90 @@ Group Members:
 -Samuel Marziliano
 
 ## Presentation: https://docs.google.com/presentation/d/1TSuybud0eG9NEw1A5J1b-Ou7nbwAyAeCA-jcfqRL7rg/edit
+
+
+User Manual
+
+
+OverView
+
+
+This project was made in order to plot the orbits of planets around the sun. This was done with Euler's formulas. These formulas give an approximate orbit of planets orbiting a star.
+
+
+
+Step By Step Guide
+
+
+First get to the main screen by clicking the start button on the main menu that will appear on launch of the program.
+
+
+Once on the main screen to display specific orbits press the Planet Preset box and check a box that is next to the name of the desired orbit.
+
+
+If a new preset is to be generated then first fill out the name text box, then give the distance in meters and mass kilograms. Then input the initial x and y velocities and then the save preset button should be enabled. If not, check that you have inputted only numbers in the value boxes and that the name text box is not blank.
+
+
+After that the new preset should be visible when the Planet Preset box is pressed, to display it press the check box next to its name.
+
+
+
+UI Description
+
+
+Home screen
+
+
+Start button: brings the user to the main screen of the application
+
+
+Exit button: closes the application
+
+
+
+Main screen
+
+
+Menu Bar -> File -> Close: Closes the application
+
+
+Menu Bar -> File -> Clear All Presets: Gets rid of all existing presets, including the automatically generated ones.
+
+
+Menu Bar -> About -> Brings the user to the about page with information regarding the project. In order to return to the main screen go into the menu bar and select file then click the back button.  
+
+
+Planet Preset box: This is the selection method to load and generate orbits. When the drop down menu is pressed all the presets that have been saved are seen. They can be plotted by checking the box next to their names. This will display all orbits that have been checked off.
+
+
+Name Text Box: This the box that will display the name of the selected preset or the name that will be given to the new preset.
+
+
+Mass Text Box: This the box that will display the mass of the selected preset in kilograms or the mass that will be given to the new preset.
+
+
+Distance Text Box: This the box that will display the distance in meters of the selected preset from the sun or the distance that will be given to the new preset.
+
+
+Initial Velocity Text Boxes: These two boxes will display the x and y velocities in meters per second of the current preset in their respective boxes or the x and y velocities that will be given to the new preset.
+
+
+Clear Button: Will clear all text boxes.
+
+
+Save Preset: This button will remain disabled until all of the above text boxes are filled with appropriate information. This means that the name must be filled out and only numbers must be present for the other values.
+
+
+Delete Preset: This button will delete the selected preset, if no preset is selected or exists it does nothing.
+
+
+Generate All Orbits Button: This button will generate all orbits from all existing presets that are saved.
+
+
+Year Trajectory slider: This slider changes the amount of time in years that the orbits are plotted, by default it is set to one.
+
+
+Graph: The graph will display the orbits that have been selected. The graph can be traversed by clicking and dragging the mouse. Zooming in can be done with the scroll wheel.
+
+
+Name Box: This box will display the name and color of the orbits that are currently on the graph.
