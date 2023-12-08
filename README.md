@@ -25,7 +25,8 @@ Group Members:
 3. [Troubleshooting](#troubleshooting) <p>
   a) ["My Orbit looks weird"](#"My-Orbit-looks-weird") <p>
   b) [Checkbox Broken](#Checkbox-broken) <p>
-  c) [Program laggy](#Program-laggy)
+  c) [Program laggy](#Program-laggy) 
+4. [References](#references)
 
 ### Utilization
 &nbsp;Before exploring how to create and edit presets, the user must understand how the program works. The program takes in 5 values:
@@ -78,4 +79,9 @@ At the bottom of the chart, the current showing planets will be displayed with t
 
 #### Program laggy:
 &nbsp; If the program is perceived as slow, give is some time to compute the values desired. Please note: changing the trajectory very quickly may be the cause of this interruption/reduction in speed.
+
+### References:
+&nbsp; The following sources where used as references in the completion of this program.
+1. [OpenStax](https://openstax.org/books/university-physics-volume-1/pages/13-1-newtons-law-of-universal-gravitation) 
+2. [Wikipedia](https://en.wikipedia.org/wiki/Euler_method#:~:text=In%20mathematics%20and%20computational%20science,with%20a%20given%20initial%20value)
 
