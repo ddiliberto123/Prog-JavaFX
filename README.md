@@ -14,8 +14,7 @@ Group Members:
 
 ### Overview
 
-
-This project was made in order to plot the orbits of planets around the sun. The orbit of these bodies are calculated using mechanic's kinematic formulas in conjuction with Euler's method. Put simply, the orbits demonstrated through the program are not exact, but are good approximations.
+&nbsp;This project was made in order to plot the orbits of planets around the sun. The orbit of these bodies are calculated using mechanic's kinematic formulas in conjuction with Euler's method. Put simply, the orbits demonstrated through the program are not exact, but are good approximations.
 
 ## Table of Contents
 1. [Utilization](#Utilization)
@@ -26,7 +25,7 @@ This project was made in order to plot the orbits of planets around the sun. The
 3. [Troubleshooting](#troubleshooting)
 
 ### Utilization
-  Before exploring how to create and edit presets, the user must understand how the program works. The program takes in 5 values:
+&nbsp;Before exploring how to create and edit presets, the user must understand how the program works. The program takes in 5 values:
   1. The Name of the planet you'd like to create
   2. The mass of the planet you'd like to create
   3. The distance from the sun the planet initially starts from
@@ -36,7 +35,7 @@ This project was made in order to plot the orbits of planets around the sun. The
   
 ### Step By Step Guide
 
-Once confronted by the menu screen, clicking the start button will send the user to the main screen. Once there, the user has the following options to select from:
+&nbsp;Once confronted by the menu screen, clicking the start button will send the user to the main screen. Once there, the user has the following options to select from:
 
 #### The Menu Bar:
   There are three options to choose from: 
@@ -44,10 +43,11 @@ Once confronted by the menu screen, clicking the start button will send the user
     2. Edit: Clicking on clear all presets, clears all the presets.
     3. Help: Sends you to the "About" page which further explains characteristics of the program.
 
-#### The left panel:
-  The left portion of the screen displays the potential data the user may input. Clicking on "Planet Presets" will engage a drop down menu allowing for the user to click on the planet names they'd like to generate into the chart.
-    When a planet is drawn inside the chart, a checkmark will be visible and the planet's respective name and colour will be displayed below the chart.
-  Clicking on the planet names within the "Planet Presets" drop down will additionally auto-fill the data fields with the data from the planet that was most recently selected. The user may modify this data, while keeping the planet name the same in order to override the already existing information. Otherwise, if the user would like to create a new planet, they can put their own respective data and planet name.
+#### [The left panel](https://github.com/ddiliberto123/Prog-JavaFX/assets/114122493/cb095d09-ecd2-4200-8a2f-e49e68bb40fe):
+
+&nbsp;The left portion of the screen displays the potential data the user may input. Clicking on "Planet Presets" will engage a drop down menu allowing for the user to click on the planet names they'd like to generate into the chart. <p>
+    When a planet is drawn inside the chart, a checkmark will be visible and the planet's respective name and colour will be displayed below the chart. <p>
+&nbsp;Clicking on the planet names within the "Planet Presets" drop down will additionally auto-fill the data fields with the data from the planet that was most recently selected. The user may modify this data, while keeping the planet name the same in order to override the already existing information. Otherwise, if the user would like to create a new planet, they can put their own respective data and planet name. 
 
 First get to the main screen by clicking the start button on the main menu that will appear on launch of the program.
 
