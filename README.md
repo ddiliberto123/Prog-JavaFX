@@ -8,6 +8,25 @@ Group Members:
 #### Presentation: https://docs.google.com/presentation/d/1TSuybud0eG9NEw1A5J1b-Ou7nbwAyAeCA-jcfqRL7rg/edit
 
 ---
+## Error Handling:
+
+![image](https://github.com/ddiliberto123/Prog-JavaFX/assets/114122493/75e349b9-73e5-46d8-8a6b-9c3c1ae1ddd3)
+
+&nbsp; The values that are auto-generated upon the launch of the program have already been tested. Two additional planets have been added into the presets and their trajectory was observed. 
+Jupiter: <p>
+Mass: 1.898E27 (kg) <p>
+Distance from sun: 7.785E11 (m) <p>
+Initial Velocity: x = 0, y = 13100 (m/s) <p>
+
+Saturn: <p>
+Mass: 5.68E26 (kg) <p>
+Distance from sun: 1.432E12 (m) <p> 
+Initial Velocity: x = 0, y = 9700 (m/s) <p>
+
+&nbsp; The values inputed for the planets above coincide with those given by NASA. The orbit of these planets, per the program's calculations, coincide with NASA's measured orbit of these planets around the sun. <p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  i.e. The orbit of these planets within the simulation are observed to be similar to those found by NASA.
+
+---
 
 # User Manual:
 
@@ -84,4 +103,4 @@ At the bottom of the chart, the current showing planets will be displayed with t
 &nbsp; The following sources where used as references in the completion of this program.
 1. [OpenStax](https://openstax.org/books/university-physics-volume-1/pages/13-1-newtons-law-of-universal-gravitation) 
 2. [Wikipedia](https://en.wikipedia.org/wiki/Euler_method#:~:text=In%20mathematics%20and%20computational%20science,with%20a%20given%20initial%20value)
-
+3. [Nasa](https://nssdc.gsfc.nasa.gov/planetary/factsheet/)
