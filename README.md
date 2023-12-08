@@ -5,7 +5,7 @@ Group Members:
 -Daniel Diliberto
 -Samuel Marziliano
 
-## Presentation: https://docs.google.com/presentation/d/1TSuybud0eG9NEw1A5J1b-Ou7nbwAyAeCA-jcfqRL7rg/edit
+#### Presentation: https://docs.google.com/presentation/d/1TSuybud0eG9NEw1A5J1b-Ou7nbwAyAeCA-jcfqRL7rg/edit
 
 ---
 
@@ -21,8 +21,11 @@ Group Members:
 2. [Step by Step Guide](#Step-by-step-guide) <p>
   a) [The Menu Bar](#The-menu-bar) <p>
   b) [The left panel](#The-left-panel) <p> 
-  c) [The Chart](#The-chart)
-3. [Troubleshooting](#troubleshooting)
+  c) [The right panel](#The-right-panel)
+3. [Troubleshooting](#troubleshooting) <p>
+  a) ["My Orbit looks weird"](#"My-Orbit-looks-weird") <p>
+  b) [Checkbox Broken](#Checkbox-broken) <p>
+  c) [Program laggy](#Program-laggy)
 
 ### Utilization
 &nbsp;Before exploring how to create and edit presets, the user must understand how the program works. The program takes in 5 values:
@@ -43,81 +46,36 @@ Group Members:
     2. Edit: Clicking on clear all presets, clears all the presets.
     3. Help: Sends you to the "About" page which further explains characteristics of the program.
 
-#### [The left panel](https://github.com/ddiliberto123/Prog-JavaFX/assets/114122493/cb095d09-ecd2-4200-8a2f-e49e68bb40fe):
+#### The Left Panel:
 
-&nbsp;The left portion of the screen displays the potential data the user may input. Clicking on "Planet Presets" will engage a drop down menu allowing for the user to click on the planet names they'd like to generate into the chart. <p>
-    When a planet is drawn inside the chart, a checkmark will be visible and the planet's respective name and colour will be displayed below the chart. <p>
-&nbsp;Clicking on the planet names within the "Planet Presets" drop down will additionally auto-fill the data fields with the data from the planet that was most recently selected. The user may modify this data, while keeping the planet name the same in order to override the already existing information. Otherwise, if the user would like to create a new planet, they can put their own respective data and planet name. 
+&nbsp;The left portion of the screen displays the potential data the user may input. In the following image, the red region is the "left panel":<p>
+![image](https://github.com/ddiliberto123/Prog-JavaFX/assets/114122493/521cdc76-be72-4041-b786-e37c09078bef) <p>
+Clicking on "Planet Presets" will engage a drop down menu allowing for the user to click on the planet names they'd like to generate into the chart. When a planet is drawn inside the chart, a checkmark will be visible and the planet's respective name and colour will be displayed below the chart. <p><p>
+&nbsp;Clicking on the planet names within the "Planet Presets" drop down will additionally auto-fill the data fields with the data from the planet that was most recently selected. The user may modify the data within the textfields, while keeping the planet name the same in order to override the already existing information. Otherwise, if the user would like to create a new planet, they can put their own respective data and planet name. <p>
 
-First get to the main screen by clicking the start button on the main menu that will appear on launch of the program.
+&nbsp; The additional 4 buttons allow the user to do the following:
+1. The "Clear" button allows the user to clear the textfields of data. <p>
+Note: this does not clear the data associated with the planet, in the instance where the data was auto-filled.
+2. The "Save Preset" button allows the user to save a preset or override an already existing preset using the data contained in the textfields. <p>
+Note: The data within the datafields must be valid for the button to be enabled.
+3. The "Delete Preset" button deletes the preset currently named within the "Name" field.
+4. The "Generate All Orbits" button shows the orbits of all planets within the chart.
 
+#### The Right Panel:
+&nbsp;The right portion of the screen is completely comprised of the chart where the planets are to be displayed. In the following image, the green region is the "right panel":<p>
+![image](https://github.com/ddiliberto123/Prog-JavaFX/assets/114122493/521cdc76-be72-4041-b786-e37c09078bef) <p>
+At the bottom of the chart, the current showing planets will be displayed with their respective colours to the left of their names. The sun will always be present and displayed at 0,0 within the chart. The user may also additionally pan within the chart to move arround. The user may also scroll either inside the chart, to keep a 1:1 ratio, or on the axises themselves if desired.
 
-Once on the main screen, press the Planet Preset box and check a box that is next to the name of the desired orbit in order to display specific orbits.
+### Troubleshooting:
 
+#### "My Orbit looks weird":
+&nbsp; If the orbit looks weird there are two solutions to fix the problem.
+1. Deselect and reselect the desired planet, allowing it to disappear from the chart and then re-appear.
+2. Make sure the chart is 1:1, scrolling on the axis can decrease the potential stretching that may have occured.
 
-If a new preset is to be generated then first fill out the name text box, then give the distance in meters and mass kilograms. Then input the initial x and y velocities and then the save preset button should be enabled. If not, check that you have inputted only numbers in the value boxes and that the name text box is not blank.
+#### Checkbox Broken:
+&nbsp; If the checkbox doesn't display the correct value, i.e. the checkbox is unchecked even though the orbit is shown, deselect and reselect the associated planet.
 
+#### Program laggy:
+&nbsp; If the program is perceived as slow, give is some time to compute the values desired. Please note: changing the trajectory very quickly may be the cause of this interruption/reduction in speed.
 
-After that the new preset should be visible when the Planet Preset box is pressed, to display it press the check box next to its name.
-
-
-
-UI Description
-
-
-Home screen
-
-
-Start button: brings the user to the main screen of the application
-
-
-Exit button: closes the application
-
-
-
-Main screen
-
-
-Menu Bar -> File -> Close: Closes the application
-
-
-Menu Bar -> File -> Clear All Presets: Gets rid of all existing presets, including the automatically generated ones.
-
-
-Menu Bar -> About -> Brings the user to the about page with information regarding the project. In order to return to the main screen go into the menu bar and select file then click the back button.  
-
-
-Planet Preset box: This is the selection method to load and generate orbits. When the drop down menu is pressed all the presets that have been saved are seen. They can be plotted by checking the box next to their names. This will display all orbits that have been checked off.
-
-
-Name Text Box: This the box that will display the name of the selected preset or the name that will be given to the new preset.
-
-
-Mass Text Box: This the box that will display the mass of the selected preset in kilograms or the mass that will be given to the new preset.
-
-
-Distance Text Box: This the box that will display the distance in meters of the selected preset from the sun or the distance that will be given to the new preset.
-
-
-Initial Velocity Text Boxes: These two boxes will display the x and y velocities in meters per second of the current preset in their respective boxes or the x and y velocities that will be given to the new preset.
-
-
-Clear Button: Will clear all text boxes.
-
-
-Save Preset: This button will remain disabled until all of the above text boxes are filled with appropriate information. This means that the name must be filled out and only numbers must be present for the other values.
-
-
-Delete Preset: This button will delete the selected preset, if no preset is selected or exists it does nothing.
-
-
-Generate All Orbits Button: This button will generate all orbits from all existing presets that are saved.
-
-
-Year Trajectory slider: This slider changes the amount of time in years that the orbits are plotted, by default it is set to one.
-
-
-Graph: The graph will display the orbits that have been selected. The graph can be traversed by clicking and dragging the mouse. Zooming in can be done with the scroll wheel.
-
-
-Name Box: This box will display the name and color of the orbits that are currently on the graph.
