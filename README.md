@@ -7,24 +7,52 @@ Group Members:
 
 ## Presentation: https://docs.google.com/presentation/d/1TSuybud0eG9NEw1A5J1b-Ou7nbwAyAeCA-jcfqRL7rg/edit
 
+---
 
-User Manual
-
-
-OverView
+# User Manual:
 
 
-This project was made in order to plot the orbits of planets around the sun. This was done with Euler's formulas. These formulas give an approximate orbit of planets orbiting a star.
+### Overview
 
 
+This project was made in order to plot the orbits of planets around the sun. The orbit of these bodies are calculated using mechanic's kinematic formulas in conjuction with Euler's method. Put simply, the orbits demonstrated through the program are not exact, but are good approximations.
 
-Step By Step Guide
+## Table of Contents
+1. [Utilization](#Utilization)
+2. [Step by Step Guide](#Step-by-step-guide) <p>
+  a) [The Menu Bar](#The-menu-bar) <p>
+  b) [The left panel](#The-left-panel) <p> 
+  c) [The Chart](#The-chart)
+3. [Troubleshooting](#troubleshooting)
 
+### Utilization
+  Before exploring how to create and edit presets, the user must understand how the program works. The program takes in 5 values:
+  1. The Name of the planet you'd like to create
+  2. The mass of the planet you'd like to create
+  3. The distance from the sun the planet initially starts from
+  4. The initial velocity of the planet in both x, y directions.
+  5. The year trajectory
+      a) The year trajectory refers to the amount of time the program projects the planet's orbit will be.
+  
+### Step By Step Guide
+
+Once confronted by the menu screen, clicking the start button will send the user to the main screen. Once there, the user has the following options to select from:
+
+#### The Menu Bar:
+  There are three options to choose from: 
+    1. File: Clicking on close, closes the program.
+    2. Edit: Clicking on clear all presets, clears all the presets.
+    3. Help: Sends you to the "About" page which further explains characteristics of the program.
+
+#### The left panel:
+  The left portion of the screen displays the potential data the user may input. Clicking on "Planet Presets" will engage a drop down menu allowing for the user to click on the planet names they'd like to generate into the chart.
+    When a planet is drawn inside the chart, a checkmark will be visible and the planet's respective name and colour will be displayed below the chart.
+  Clicking on the planet names within the "Planet Presets" drop down will additionally auto-fill the data fields with the data from the planet that was most recently selected. The user may modify this data, while keeping the planet name the same in order to override the already existing information. Otherwise, if the user would like to create a new planet, they can put their own respective data and planet name.
 
 First get to the main screen by clicking the start button on the main menu that will appear on launch of the program.
 
 
-Once on the main screen to display specific orbits press the Planet Preset box and check a box that is next to the name of the desired orbit.
+Once on the main screen, press the Planet Preset box and check a box that is next to the name of the desired orbit in order to display specific orbits.
 
 
 If a new preset is to be generated then first fill out the name text box, then give the distance in meters and mass kilograms. Then input the initial x and y velocities and then the save preset button should be enabled. If not, check that you have inputted only numbers in the value boxes and that the name text box is not blank.
