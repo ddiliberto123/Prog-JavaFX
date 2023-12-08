@@ -62,10 +62,10 @@ Initial Velocity: x = 0, y = 9700 (m/s) <p> <p>
 &nbsp;Once confronted by the menu screen, clicking the start button will send the user to the main screen. Once there, the user has the following options to select from:
 
 #### The Menu Bar:
-  There are three options to choose from: 
-    1. File: Clicking on close, closes the program.
-    2. Edit: Clicking on clear all presets, clears all the presets.
-    3. Help: Sends you to the "About" page which further explains characteristics of the program.
+&nbsp;There are three options to choose from:
+1. File: Clicking on close, closes the program.
+2. Edit: Clicking on clear all presets, clears all the presets.
+3. Help: Sends you to the "About" page which further explains characteristics of the program.
 
 #### The Left Panel:
 
