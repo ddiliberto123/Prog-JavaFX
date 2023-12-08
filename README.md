@@ -1,5 +1,6 @@
 # Prog-JavaFX
 Group Term Project for 420-203-RE
+[GitHub Repo](https://github.com/ddiliberto123/Prog-JavaFX)
 
 Group Members:
 1. Daniel Diliberto
