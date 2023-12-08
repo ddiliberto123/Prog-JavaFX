@@ -11,11 +11,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
@@ -24,23 +21,19 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 //https://controlsfx.github.io/javadoc/11.0.3/index.html
 import org.controlsfx.control.CheckComboBox;
-import org.controlsfx.control.IndexedCheckModel;
 //https://gillius.org/jfxutils/docs/latest/
 import org.gillius.jfxutils.chart.AxisConstraint;
 import org.gillius.jfxutils.chart.AxisConstraintStrategies;
 import org.gillius.jfxutils.chart.AxisConstraintStrategy;
-import org.gillius.jfxutils.chart.AxisTickFormatter;
 import org.gillius.jfxutils.chart.ChartPanManager;
 import org.gillius.jfxutils.chart.ChartZoomManager;
 
