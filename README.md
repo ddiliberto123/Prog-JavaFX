@@ -17,12 +17,12 @@ Group Members:
 Jupiter: <p>
 Mass: 1.898E27 (kg) <p>
 Distance from sun: 7.785E11 (m) <p>
-Initial Velocity: x = 0, y = 13100 (m/s) <p>
+Initial Velocity: x = 0, y = 13100 (m/s) <p> <p>
 
 Saturn: <p>
 Mass: 5.68E26 (kg) <p>
 Distance from sun: 1.432E12 (m) <p> 
-Initial Velocity: x = 0, y = 9700 (m/s) <p>
+Initial Velocity: x = 0, y = 9700 (m/s) <p> <p>
 
 &nbsp; The values inputed for the planets above coincide with those given by NASA. The orbit of these planets, per the program's calculations, coincide with NASA's measured orbit of these planets around the sun. <p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  i.e. The orbit of these planets within the simulation are observed to be similar to those found by NASA.
@@ -54,7 +54,7 @@ Initial Velocity: x = 0, y = 9700 (m/s) <p>
   2. The mass of the planet you'd like to create
   3. The distance from the sun the planet initially starts from
   4. The initial velocity of the planet in both x, y directions.
-  5. The year trajectory
+  5. The year trajectory <p>
       a) The year trajectory refers to the amount of time the program projects the planet's orbit will be.
   
 ### Step By Step Guide
