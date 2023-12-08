@@ -1,5 +1,5 @@
 # Prog-JavaFX
-Group Term Project for 420-203-RE
+Group Term Project for 420-203-RE <p>
 [GitHub Repo](https://github.com/ddiliberto123/Prog-JavaFX)
 
 Group Members:
